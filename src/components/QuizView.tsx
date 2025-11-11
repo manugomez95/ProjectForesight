@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { QuizQuestion, QuizAnswer } from '../types/quiz';
+import { useState } from 'react';
+import type { QuizQuestion, QuizAnswer } from '../types/quiz';
 import { quizQuestions } from '../data/quizQuestions';
 import { motion, AnimatePresence } from 'framer-motion';
 

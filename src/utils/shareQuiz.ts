@@ -1,4 +1,4 @@
-import { QuizAnswer } from '../types/quiz';
+import type { QuizAnswer } from '../types/quiz';
 
 export function encodeQuizAnswers(answers: QuizAnswer[]): string {
   // Create a compact representation of answers

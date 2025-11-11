@@ -1,5 +1,5 @@
-import { QuizAnswer } from '../types/quiz';
-import { AIScenario, TimelinePeriod, ScenarioParameter, Assumption, ScenarioOutcome, DataPoint } from '../types/scenario';
+import type { QuizAnswer } from '../types/quiz';
+import type { AIScenario, TimelinePeriod, ScenarioParameter, Assumption, ScenarioOutcome, DataPoint } from '../types/scenario';
 
 export function generateForecastFromQuiz(answers: QuizAnswer[]): AIScenario {
   const answerMap = new Map(answers.map((a) => [a.questionId, a.value]));
@@ -19,7 +19,7 @@ export function generateForecastFromQuiz(answers: QuizAnswer[]): AIScenario {
   const endYear = agiYear + yearsToMaturity;
 
   // Generate timeline periods
-  const periods = generateTimeline(agiYear, endYear, devSpeed, automationLevel, unemploymentPeak, outlook);
+  const periods = generateTimeline(agiYear, endYear, devSpeed, automationLevel, unemploymentPeak, outlook, aiRevenuePeak);
 
   // Generate parameters
   const parameters = generateParameters(agiYear, endYear, aiRevenuePeak, unemploymentPeak, automationLevel);
@@ -73,7 +73,8 @@ function generateTimeline(
   devSpeed: number,
   automationLevel: number,
   unemploymentPeak: number,
-  outlook: number
+  outlook: number,
+  aiRevenuePeak: number
 ): TimelinePeriod[] {
   const currentYear = new Date().getFullYear();
   const periods: TimelinePeriod[] = [];
