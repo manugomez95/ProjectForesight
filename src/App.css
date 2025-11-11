@@ -36,22 +36,21 @@
 }
 
 .metric-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: #0f172a;
+  border: 2px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .metric-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #1e293b;
+  border-color: #475569;
 }
 
 .metric-card.active {
-  background: rgba(255, 255, 255, 0.1);
+  background: #1e293b;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -82,11 +81,10 @@
 }
 
 .chart-section {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 16px;
   padding: 2rem;
-  backdrop-filter: blur(10px);
 }
 
 .chart-container h2 {
@@ -103,11 +101,10 @@
 }
 
 .scenario-selector {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #16213e;
+  border: 1px solid #2d3a5f;
   border-radius: 16px;
   padding: 2rem;
-  backdrop-filter: blur(10px);
 }
 
 .selector-header {
@@ -122,7 +119,7 @@
 }
 
 .selector-header .subtitle {
-  color: #fff;
+  color: #cbd5e1;
   font-size: 1rem;
 }
 
@@ -141,10 +138,10 @@
 .scenario-select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  border: 3px solid rgba(255, 255, 255, 0.4);
+  background: #0f172a;
+  border: 2px solid #334155;
   border-radius: 8px;
-  color: #fff;
+  color: #e2e8f0;
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
@@ -152,15 +149,15 @@
 }
 
 .scenario-select option {
-  background: #0f0f1a;
-  color: #fff;
+  background: #0f172a;
+  color: #e2e8f0;
   font-weight: 500;
   padding: 0.5rem;
 }
 
 .scenario-select:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #1e293b;
+  border-color: #475569;
 }
 
 .scenario-info {
@@ -168,8 +165,8 @@
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 8px;
 }
 
@@ -187,7 +184,7 @@
 }
 
 .info-row .value {
-  color: #fff;
+  color: #e2e8f0;
 }
 
 .info-row a {
@@ -272,11 +269,10 @@
 }
 
 .scenario-viewer {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #16213e;
+  border: 1px solid #2d3a5f;
   border-radius: 16px;
   padding: 2rem;
-  backdrop-filter: blur(10px);
 }
 
 .view-mode-selector {
@@ -284,8 +280,8 @@
   gap: 0.5rem;
   margin-bottom: 2rem;
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   overflow-x: auto;
 }
@@ -295,9 +291,9 @@
   min-width: 120px;
   padding: 0.75rem 1rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #334155;
   border-radius: 8px;
-  color: #d1d5db;
+  color: #94a3b8;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -306,13 +302,13 @@
 }
 
 .view-mode-button:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  background: #1e293b;
+  color: #e2e8f0;
 }
 
 .view-mode-button.active {
-  background: rgba(102, 126, 234, 0.3);
-  border-color: rgba(102, 126, 234, 0.5);
+  background: #667eea;
+  border-color: #667eea;
   color: #fff;
 }
 
@@ -373,8 +369,8 @@
 
 .period-card {
   flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
@@ -382,8 +378,8 @@
 }
 
 .period-card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #1e293b;
+  border-color: #475569;
   transform: translateX(4px);
 }
 
@@ -414,16 +410,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(102, 126, 234, 0.2);
+  background: #667eea;
   border-radius: 6px;
   font-size: 1.2rem;
-  color: #667eea;
+  color: #fff;
 }
 
 .period-content {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #334155;
 }
 
 .period-narrative {
@@ -480,8 +476,8 @@
 
 .metric-item {
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 6px;
   font-size: 0.9rem;
 }
@@ -611,8 +607,8 @@
 
 .path-button {
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: #0f172a;
+  border: 2px solid #334155;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -620,13 +616,13 @@
 }
 
 .path-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #1e293b;
+  border-color: #475569;
 }
 
 .path-button.active {
-  background: rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.5);
+  background: #6d28d9;
+  border-color: #8b5cf6;
 }
 
 .path-name {
@@ -642,8 +638,8 @@
 
 .path-content {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
 }
 
@@ -692,8 +688,8 @@
 }
 
 .parameter-chart {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
 }
@@ -726,8 +722,8 @@
 }
 
 .assumption-card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
 }
@@ -834,8 +830,8 @@
 }
 
 .outcome-card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0f172a;
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
 }
@@ -853,8 +849,8 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 8px;
 }
 
