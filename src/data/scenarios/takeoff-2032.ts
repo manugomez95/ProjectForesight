@@ -1,4 +1,4 @@
-import { AIScenario } from '../../types/scenario';
+import type { AIScenario } from '../../types/scenario';
 
 /**
  * Romeo's "A 2032 Takeoff Story" from LessWrong

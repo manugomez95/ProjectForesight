@@ -1,4 +1,4 @@
-import { AIScenario } from '../types/scenario';
+import type { AIScenario } from '../types/scenario';
 import { useState } from 'react';
 import TimelineView from './TimelineView';
 import BranchingView from './BranchingView';

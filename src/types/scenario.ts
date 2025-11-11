@@ -76,8 +76,8 @@ export interface Assumption {
   id: string;
   category: string; // e.g., "technical", "geopolitical", "economic"
   description: string;
-  confidence: 'low' | 'medium' | 'high';
-  impact: 'low' | 'medium' | 'high'; // impact if assumption is wrong
+  confidence: 'low' | 'medium' | 'high' | 'critical';
+  impact: 'low' | 'medium' | 'high' | 'critical'; // impact if assumption is wrong
 }
 
 /**

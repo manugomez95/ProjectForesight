@@ -1,4 +1,4 @@
-import { Branch } from '../types/scenario';
+import type { Branch } from '../types/scenario';
 import { useState } from 'react';
 import TimelineView from './TimelineView';
 

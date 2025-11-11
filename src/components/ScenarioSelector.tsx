@@ -1,4 +1,4 @@
-import { AIScenario } from '../types/scenario';
+import type { AIScenario } from '../types/scenario';
 
 interface ScenarioSelectorProps {
   scenarios: AIScenario[];

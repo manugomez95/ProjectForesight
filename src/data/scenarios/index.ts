@@ -1,4 +1,4 @@
-import { AIScenario } from '../../types/scenario';
+import type { AIScenario } from '../../types/scenario';
 import { takeoff2032 } from './takeoff-2032';
 
 /**

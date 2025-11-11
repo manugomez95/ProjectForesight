@@ -1,4 +1,4 @@
-import { TimelinePeriod, Milestone } from '../types/scenario';
+import type { TimelinePeriod, Milestone } from '../types/scenario';
 import { useState } from 'react';
 
 interface TimelineViewProps {

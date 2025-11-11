@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { ScenarioParameter } from '../types/scenario';
+import type { ScenarioParameter } from '../types/scenario';
 
 interface ScenarioParameterChartProps {
   parameter: ScenarioParameter;
