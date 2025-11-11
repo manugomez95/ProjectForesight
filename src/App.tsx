@@ -17,7 +17,7 @@ function App() {
   const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId)
 
   return (
-    <div className="app">
+    <div className={`app ${viewMode === 'parameter' ? 'parameter-mode' : 'scenario-mode'}`}>
       <motion.header
         className="header"
         initial={{ opacity: 0, y: -20 }}

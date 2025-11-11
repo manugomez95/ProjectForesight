@@ -3,6 +3,14 @@
   padding: 2rem;
   background: #0a0f1e;
   color: #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 .header {
@@ -57,8 +65,10 @@
 }
 
 .main-content {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .metrics-grid {
