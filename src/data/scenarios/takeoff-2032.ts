@@ -2,7 +2,7 @@ import type { AIScenario } from '../../types/scenario';
 
 /**
  * Romeo's "A 2032 Takeoff Story" from LessWrong
- * Source: https://www.lesswrong.com/posts/[id]/a-2032-takeoff-story
+ * Source: https://www.lesswrong.com/posts/yHvzscCiS7KbPkSzf/a-2032-takeoff-story
  *
  * This scenario depicts a modal/median AI takeoff timeline with branching paths
  * based on takeoff speed (fast vs slow) starting in 2033.
@@ -13,7 +13,7 @@ export const takeoff2032: AIScenario = {
   title: 'A 2032 Takeoff Story',
   author: 'romeo',
   source: 'LessWrong',
-  sourceUrl: 'https://www.lesswrong.com/posts/[id]/a-2032-takeoff-story',
+  sourceUrl: 'https://www.lesswrong.com/posts/yHvzscCiS7KbPkSzf/a-2032-takeoff-story',
   datePublished: '2025-11-06',
 
   // Summary

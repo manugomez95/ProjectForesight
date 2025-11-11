@@ -1,6 +1,8 @@
 .app {
   min-height: 100vh;
   padding: 2rem;
+  background: #0a0f1e;
+  color: #e2e8f0;
 }
 
 .header {
@@ -761,6 +763,12 @@
   background: rgba(239, 68, 68, 0.2);
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.badge.impact-critical {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #111111;
 }
 
 .badge.technical {
