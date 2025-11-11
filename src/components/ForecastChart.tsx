@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
 
 interface ForecastChartProps {
@@ -6,7 +6,7 @@ interface ForecastChartProps {
 }
 
 // Sample data - replace with your actual data
-const generateData = (metric: string) => {
+const generateData = (_metric: string) => {
   const baseData = [
     { year: 2020, value: 100, prediction: 100 },
     { year: 2021, value: 150, prediction: 145 },
