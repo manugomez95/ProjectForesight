@@ -58,3 +58,51 @@ export function getParameterData(parameterId: string): {
       parameter: AIScenario['parameters'][0];
     }[];
 }
+
+/**
+ * Get all unique parameters across all scenarios
+ * Groups parameters by name (not ID) to handle similar parameters across scenarios
+ */
+export function getAllParameters(): {
+  name: string;
+  description: string;
+  unit: string;
+  scenarioCount: number;
+  parameterIds: { scenarioId: string; parameterId: string }[];
+}[] {
+  const parameterMap = new Map<string, {
+    name: string;
+    description: string;
+    unit: string;
+    scenarioCount: number;
+    parameterIds: { scenarioId: string; parameterId: string }[];
+  }>();
+
+  scenarios.forEach(scenario => {
+    scenario.parameters.forEach(param => {
+      const existing = parameterMap.get(param.name);
+      if (existing) {
+        existing.scenarioCount++;
+        existing.parameterIds.push({
+          scenarioId: scenario.id,
+          parameterId: param.id
+        });
+      } else {
+        parameterMap.set(param.name, {
+          name: param.name,
+          description: param.description,
+          unit: param.unit,
+          scenarioCount: 1,
+          parameterIds: [{
+            scenarioId: scenario.id,
+            parameterId: param.id
+          }]
+        });
+      }
+    });
+  });
+
+  return Array.from(parameterMap.values()).sort((a, b) =>
+    b.scenarioCount - a.scenarioCount || a.name.localeCompare(b.name)
+  );
+}
