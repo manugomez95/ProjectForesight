@@ -977,6 +977,7 @@
   border-radius: 16px;
   padding: 2rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .comparison-header {
@@ -986,11 +987,12 @@
   gap: 2rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .comparison-header > div:first-child {
-  flex: 1;
-  min-width: 250px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .comparison-header h2 {
@@ -1009,7 +1011,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  min-width: 300px;
+  flex: 0 0 auto;
+  min-width: 250px;
+  max-width: 350px;
 }
 
 .parameter-selector label {
@@ -1045,6 +1049,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
 }
 
 .parameter-info {
@@ -1052,6 +1057,8 @@
   background: #0f172a;
   border: 1px solid #334155;
   border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .parameter-info h3 {
@@ -1084,6 +1091,8 @@
   border: 1px solid #334155;
   border-radius: 12px;
   padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .scenario-list {
@@ -1091,6 +1100,8 @@
   background: #0f172a;
   border: 1px solid #334155;
   border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .scenario-list h4 {
