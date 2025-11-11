@@ -10,7 +10,15 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
-import type { AIScenario } from '../types/scenario';
+import type { AIScenario, ScenarioParameter } from '../types/scenario';
+
+type ComparisonData = {
+  chartData: Array<{ date: string; [key: string]: string | number }>;
+  scenariosWithParameter: Array<{
+    scenario: AIScenario;
+    parameter: ScenarioParameter;
+  }>;
+};
 
 export default function ParameterComparisonView() {
   const allParameters = getAllParameters();
@@ -21,14 +29,16 @@ export default function ParameterComparisonView() {
   const selectedParameter = allParameters.find(p => p.name === selectedParameterName);
 
   // Get all data points for the selected parameter across scenarios
-  const getComparisonData = () => {
-    if (!selectedParameter) return [];
+  const getComparisonData = (): ComparisonData => {
+    if (!selectedParameter) {
+      return { chartData: [], scenariosWithParameter: [] };
+    }
 
     // Collect all scenarios that have this parameter
-    const scenariosWithParameter: {
+    const scenariosWithParameter: Array<{
       scenario: AIScenario;
-      parameter: AIScenario['parameters'][0];
-    }[] = [];
+      parameter: ScenarioParameter;
+    }> = [];
 
     selectedParameter.parameterIds.forEach(({ scenarioId, parameterId }) => {
       const scenario = scenarios.find(s => s.id === scenarioId);
@@ -159,7 +169,7 @@ export default function ParameterComparisonView() {
                     return scenario?.title || value;
                   }}
                 />
-                {scenariosWithParameter.map(({ scenario, parameter }, index) => (
+                {scenariosWithParameter.map(({ scenario, parameter }: { scenario: AIScenario; parameter: ScenarioParameter }, index: number) => (
                   <Line
                     key={scenario.id}
                     type="monotone"
@@ -179,7 +189,7 @@ export default function ParameterComparisonView() {
           <div className="scenario-list">
             <h4>Scenarios Included:</h4>
             <ul>
-              {scenariosWithParameter.map(({ scenario }) => (
+              {scenariosWithParameter.map(({ scenario }: { scenario: AIScenario }) => (
                 <li key={scenario.id}>
                   <strong>{scenario.title}</strong> by {scenario.author} ({scenario.scenarioType})
                 </li>
