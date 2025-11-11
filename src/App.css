@@ -19,7 +19,7 @@
 }
 
 .subtitle {
-  color: #888;
+  color: #d1d5db;
   font-size: 1.2rem;
 }
 
@@ -117,6 +117,11 @@
 .selector-header h2 {
   margin: 0 0 0.5rem 0;
   font-size: 1.8rem;
+  color: #fff;
+}
+
+.selector-header .subtitle {
+  color: #d1d5db;
 }
 
 .scenario-dropdown {
@@ -127,7 +132,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #aaa;
+  color: #d1d5db;
 }
 
 .scenario-select {
@@ -164,7 +169,7 @@
 
 .info-row .label {
   font-weight: 600;
-  color: #aaa;
+  color: #d1d5db;
   min-width: 100px;
 }
 
@@ -190,10 +195,11 @@
 .scenario-summary h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1.2rem;
+  color: #fff;
 }
 
 .scenario-summary p {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
 }
 
@@ -272,9 +278,9 @@
   min-width: 120px;
   padding: 0.75rem 1rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -407,7 +413,7 @@
 }
 
 .period-narrative p {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
 }
 
@@ -417,7 +423,7 @@
 
 .period-events h5 {
   margin: 0 0 0.5rem 0;
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -426,7 +432,7 @@
 .period-events ul {
   margin: 0;
   padding-left: 1.5rem;
-  color: #ccc;
+  color: #e5e7eb;
 }
 
 .period-events li {
@@ -440,7 +446,7 @@
 
 .period-metrics h5 {
   margin: 0 0 0.5rem 0;
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -460,7 +466,7 @@
 }
 
 .metric-key {
-  color: #aaa;
+  color: #d1d5db;
   margin-right: 0.5rem;
 }
 
@@ -478,7 +484,7 @@
 .period-milestones h5 {
   width: 100%;
   margin: 0 0 0.5rem 0;
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -556,13 +562,13 @@
 .trigger-condition h4,
 .branch-description {
   margin-bottom: 0.75rem;
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
 }
 
 .trigger-condition p,
 .branch-description p {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
 }
 
@@ -572,7 +578,7 @@
 
 .path-selector h4 {
   margin: 0 0 1rem 0;
-  color: #aaa;
+  color: #d1d5db;
 }
 
 .path-buttons {
@@ -624,7 +630,7 @@
 }
 
 .path-description {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
@@ -645,7 +651,7 @@
 
 .path-outcome p {
   margin: 0;
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
 }
 
@@ -653,6 +659,7 @@
 .parameters-section h3 {
   margin: 0 0 2rem 0;
   font-size: 1.5rem;
+  color: #fff;
 }
 
 .parameters-grid {
@@ -674,7 +681,7 @@
 }
 
 .chart-description {
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -683,6 +690,7 @@
 .assumptions-section h3 {
   margin: 0 0 1.5rem 0;
   font-size: 1.5rem;
+  color: #fff;
 }
 
 .assumptions-list {
@@ -714,9 +722,9 @@
 
 .badge.confidence-low,
 .badge.impact-low {
-  background: rgba(156, 163, 175, 0.2);
-  color: #9ca3af;
-  border: 1px solid rgba(156, 163, 175, 0.4);
+  background: rgba(156, 163, 175, 0.3);
+  color: #d1d5db;
+  border: 1px solid rgba(156, 163, 175, 0.5);
 }
 
 .badge.confidence-medium,
@@ -758,7 +766,7 @@
 }
 
 .assumption-description {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
   margin: 0;
 }
@@ -778,7 +786,7 @@
 .open-questions ul {
   margin: 0;
   padding-left: 1.5rem;
-  color: #ccc;
+  color: #e5e7eb;
 }
 
 .open-questions li {
@@ -790,6 +798,7 @@
 .outcomes-section h3 {
   margin: 0 0 1.5rem 0;
   font-size: 1.5rem;
+  color: #fff;
 }
 
 .outcomes-list {
@@ -827,7 +836,7 @@
 }
 
 .metric-label {
-  color: #aaa;
+  color: #d1d5db;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -873,9 +882,9 @@
 }
 
 .badge.neutral {
-  background: rgba(156, 163, 175, 0.2);
-  color: #9ca3af;
-  border: 1px solid rgba(156, 163, 175, 0.4);
+  background: rgba(156, 163, 175, 0.3);
+  color: #d1d5db;
+  border: 1px solid rgba(156, 163, 175, 0.5);
 }
 
 .badge.bad,
@@ -887,7 +896,7 @@
 }
 
 .outcome-description {
-  color: #ccc;
+  color: #e5e7eb;
   line-height: 1.6;
   margin: 0;
 }
