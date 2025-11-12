@@ -18,14 +18,14 @@ export const ASSUMPTION_REPOSITORY: AssumptionDefinition[] = [
   // ============================================================================
   {
     id: 'recursive-self-improvement',
-    name: 'Recursive Self-Improvement',
+    name: 'Recursive Self-Improvement / AI R&D Acceleration',
     description:
-      'AI-assisted AI research creates recursive improvement loop, leading to super-exponential capability growth. AI systems can effectively improve their own capabilities or train successor systems.',
+      'AI-assisted AI research creates recursive improvement loop, leading to super-exponential capability growth. AI systems can effectively improve their own capabilities or train successor systems, achieving dramatic R&D progress multipliers.',
     category: 'technical',
     defaultConfidence: 'medium',
     defaultImpact: 'critical',
-    tags: ['capability-growth', 'rsi', 'recursive', 'acceleration'],
-    aliases: ['RSI', 'Self-improving AI', 'Recursive improvement'],
+    tags: ['capability-growth', 'rsi', 'recursive', 'acceleration', 'algorithmic-progress'],
+    aliases: ['RSI', 'Self-improving AI', 'Recursive improvement', 'Algorithmic progress accelerates', 'AI R&D speedup'],
     relatedParameters: ['ai-capability-multiplier', 'training-compute-scale'],
   },
   {
@@ -39,18 +39,6 @@ export const ASSUMPTION_REPOSITORY: AssumptionDefinition[] = [
     tags: ['compute', 'scaling', 'infrastructure'],
     aliases: ['Compute availability', 'Scaling laws hold'],
     relatedParameters: ['training-compute-scale', 'global-ai-capex'],
-  },
-  {
-    id: 'algorithmic-progress-accelerates',
-    name: 'Algorithmic Progress Accelerates',
-    description:
-      'Algorithmic improvements continue to compound, potentially accelerated by AI-assisted research. New architectures and training methods enable step-changes in capability.',
-    category: 'technical',
-    defaultConfidence: 'medium',
-    defaultImpact: 'critical',
-    tags: ['algorithms', 'research', 'progress', 'acceleration'],
-    aliases: ['Algorithmic breakthroughs', 'Continued progress'],
-    relatedParameters: ['ai-capability-multiplier'],
   },
   {
     id: 'neuralese-breakthrough',

@@ -707,7 +707,7 @@ export const ai2027Forecast: AIScenario = {
       impact: 'critical'
     },
     {
-      id: 'algorithmic-progress-accelerates',
+      id: 'recursive-self-improvement',
       category: 'technical',
       description: 'AI-assisted AI research creates recursive improvement loop, achieving 1.5x → 4x → 10x → 25x → 50x R&D progress multipliers over ~18 months.',
       confidence: 'medium',
