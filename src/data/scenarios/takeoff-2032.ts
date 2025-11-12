@@ -508,6 +508,30 @@ export const takeoff2032: AIScenario = {
           ],
           parameters: [
             {
+              id: 'automation-level',
+              name: 'Economic Automation Level',
+              description: 'Percentage of 2024-economy tasks now done by AI',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low', label: 'Rapid automation begins' },
+                { date: '2033-09', value: 95, confidence: 'low', label: 'Near-total automation' },
+                { date: '2034-01', value: 99, confidence: 'low', label: 'Complete automation' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'unemployment',
+              name: 'US Unemployment Rate',
+              description: 'Unemployment rate in the United States',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 15, confidence: 'low', label: 'Accelerating displacement' },
+                { date: '2033-09', value: 40, confidence: 'low', label: 'Mass unemployment' },
+                { date: '2034-01', value: 80, confidence: 'low', label: 'Economic irrelevance' }
+              ],
+              color: '#ef4444'
+            },
+            {
               id: 'ai-capability-multiplier-b1',
               name: 'AI Capability Multiplier (Branch 1)',
               description: 'AI capability relative to best human researcher',
@@ -741,6 +765,46 @@ export const takeoff2032: AIScenario = {
           ],
           parameters: [
             {
+              id: 'automation-level',
+              name: 'Economic Automation Level',
+              description: 'Percentage of 2024-economy tasks now done by AI',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 55, confidence: 'low', label: 'Gradual growth' },
+                { date: '2034-01', value: 65, confidence: 'low' },
+                { date: '2035-01', value: 75, confidence: 'low' },
+                { date: '2035-12', value: 85, confidence: 'low', label: 'ASI-directed automation' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'unemployment',
+              name: 'US Unemployment Rate',
+              description: 'Unemployment rate in the United States',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 12, confidence: 'low' },
+                { date: '2034-01', value: 15, confidence: 'low', label: 'China pulls ahead' },
+                { date: '2035-01', value: 18, confidence: 'low' },
+                { date: '2035-12', value: 20, confidence: 'low', label: 'Post-surrender' }
+              ],
+              color: '#ef4444'
+            },
+            {
+              id: 'china-robots',
+              name: 'China Robot Count',
+              description: 'Total number of robots in China (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 200, confidence: 'low', label: 'From main timeline' },
+                { date: '2034-01', value: 400, confidence: 'low' },
+                { date: '2035-01', value: 800, confidence: 'low' },
+                { date: '2035-07', value: 1600, confidence: 'low', label: 'Monthly doubling begins' },
+                { date: '2035-12', value: 6400, confidence: 'low', label: 'Industrial explosion' }
+              ],
+              color: '#f59e0b'
+            },
+            {
               id: 'research-taste-china-b2',
               name: 'China AI Research Taste (Branch 2)',
               description: 'Quality of Chinese AI research decisions vs human distribution',
@@ -793,20 +857,6 @@ export const takeoff2032: AIScenario = {
                 { date: '2035-06', value: 8.0, confidence: 'low', label: 'Industrial scale' }
               ],
               color: '#10b981'
-            },
-            {
-              id: 'china-robot-count-b2',
-              name: 'China Robot Count (Branch 2)',
-              description: 'Total robots in China during slow takeoff',
-              unit: 'millions',
-              data: [
-                { date: '2033-01', value: 200, confidence: 'low', label: 'From main timeline' },
-                { date: '2034-01', value: 400, confidence: 'low' },
-                { date: '2035-01', value: 800, confidence: 'low' },
-                { date: '2035-07', value: 1600, confidence: 'low', label: 'Monthly doubling begins' },
-                { date: '2035-12', value: 6400, confidence: 'low', label: 'Industrial explosion' }
-              ],
-              color: '#8b5cf6'
             },
             {
               id: 'geopolitical-tension-b2',
