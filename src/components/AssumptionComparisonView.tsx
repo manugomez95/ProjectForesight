@@ -139,30 +139,27 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
       {uniqueAssumptions.length > 0 && (
         <div className="assumptions-section">
           <h3>🔸 Unique Assumptions (Used by Single Scenario)</h3>
-          <details>
-            <summary>Show {uniqueAssumptions.length} unique assumptions</summary>
-            <div className="assumptions-list">
-              {uniqueAssumptions.map((usage) => {
-                const scenario = scenarios.find((s) => s.id === usage.scenarios[0]);
+          <div className="assumptions-list">
+            {uniqueAssumptions.map((usage) => {
+              const scenario = scenarios.find((s) => s.id === usage.scenarios[0]);
 
-                return (
-                  <div
-                    key={usage.assumptionId}
-                    ref={(el) => {
-                      if (el) assumptionRefs.current.set(usage.assumptionId, el);
-                    }}
-                    className="assumption-card unique"
-                  >
-                    <div className="assumption-header">
-                      <span className={`badge ${usage.category}`}>{usage.category}</span>
-                      <span className="scenario-badge">{scenario?.title || usage.scenarios[0]}</span>
-                    </div>
-                    <p className="assumption-description">{usage.description}</p>
+              return (
+                <div
+                  key={usage.assumptionId}
+                  ref={(el) => {
+                    if (el) assumptionRefs.current.set(usage.assumptionId, el);
+                  }}
+                  className="assumption-card unique"
+                >
+                  <div className="assumption-header">
+                    <span className={`badge ${usage.category}`}>{usage.category}</span>
+                    <span className="scenario-badge">{scenario?.title || usage.scenarios[0]}</span>
                   </div>
-                );
-              })}
-            </div>
-          </details>
+                  <p className="assumption-description">{usage.description}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 
