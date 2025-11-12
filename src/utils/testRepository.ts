@@ -3,7 +3,7 @@
  * Run this to check if everything is working correctly
  */
 
-import { findOrCreateParameter, findOrCreateMilestone } from './repositoryFactory';
+import { findOrCreateParameter } from './repositoryFactory';
 import { findParameterByName } from '../data/repository/parameters';
 import { findMilestoneByName } from '../data/repository/milestones';
 import { normalizeScenario } from './repositoryConverter';

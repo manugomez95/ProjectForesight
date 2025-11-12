@@ -19,7 +19,7 @@ import {
   MILESTONE_REPOSITORY,
   findMilestoneByName,
 } from '../data/repository/milestones';
-import { findSimilarItems, findExactMatch } from './repositoryMatching';
+import { findSimilarItems } from './repositoryMatching';
 
 /**
  * Result of a find-or-create operation
