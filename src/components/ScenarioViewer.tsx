@@ -1,17 +1,25 @@
-import type { AIScenario } from '../types/scenario';
-import { useState } from 'react';
+import type { AIScenario, FlexibleScenario } from '../types/scenario';
+import { useState, useMemo } from 'react';
 import TimelineView from './TimelineView';
 import BranchingView from './BranchingView';
 import ScenarioParameterChart from './ScenarioParameterChart';
+import { getAllAssumptions } from '../utils/resolveAssumptions';
 
 interface ScenarioViewerProps {
-  scenario: AIScenario;
+  scenario: FlexibleScenario;
 }
 
 type ViewMode = 'timeline' | 'parameters' | 'assumptions' | 'outcomes';
 
 export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('timeline');
+
+  // Resolve assumptions from both inline and repository references
+  const assumptions = useMemo(() => {
+    const aiScenario = scenario as AIScenario;
+    const repoScenario = scenario as any; // RepositoryBasedScenario
+    return getAllAssumptions(aiScenario.assumptions, repoScenario.assumptionRefs);
+  }, [scenario]);
 
   return (
     <div className="scenario-viewer">
@@ -72,26 +80,30 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
         {viewMode === 'assumptions' && (
           <div className="assumptions-section">
             <h3>Key Assumptions</h3>
-            <div className="assumptions-list">
-              {scenario.assumptions.map((assumption) => (
-                <div key={assumption.id} className="assumption-card">
-                  <div className="assumption-header">
-                    <span className={`badge ${assumption.category}`}>
-                      {assumption.category}
-                    </span>
-                    <div className="assumption-badges">
-                      <span className={`badge confidence-${assumption.confidence}`}>
-                        Confidence: {assumption.confidence}
+            {assumptions.length === 0 ? (
+              <p className="no-data">No assumptions specified for this scenario.</p>
+            ) : (
+              <div className="assumptions-list">
+                {assumptions.map((assumption) => (
+                  <div key={assumption.id} className="assumption-card">
+                    <div className="assumption-header">
+                      <span className={`badge ${assumption.category}`}>
+                        {assumption.category}
                       </span>
-                      <span className={`badge impact-${assumption.impact}`}>
-                        Impact: {assumption.impact}
-                      </span>
+                      <div className="assumption-badges">
+                        <span className={`badge confidence-${assumption.confidence}`}>
+                          Confidence: {assumption.confidence}
+                        </span>
+                        <span className={`badge impact-${assumption.impact}`}>
+                          Impact: {assumption.impact}
+                        </span>
+                      </div>
                     </div>
+                    <p className="assumption-description">{assumption.description}</p>
                   </div>
-                  <p className="assumption-description">{assumption.description}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             {scenario.openQuestions && scenario.openQuestions.length > 0 && (
               <div className="open-questions">

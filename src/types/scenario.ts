@@ -175,6 +175,8 @@ export interface RepositoryBasedScenario extends Omit<AIScenario, 'parameters' |
   parameterRefs: RepositoryParameter[];
   /** Milestones referenced from the repository */
   milestoneRefs: MilestoneReference[];
+  /** Assumptions referenced from the repository (optional, for backward compatibility) */
+  assumptionRefs?: import('./repository').AssumptionReference[];
 }
 
 /**

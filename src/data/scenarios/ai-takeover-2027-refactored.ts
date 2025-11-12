@@ -346,48 +346,37 @@ export const aiTakeover2027Refactored: RepositoryBasedScenario = {
   // Structure
   hasBranching: false,
 
-  // Context
-  assumptions: [
+  // Context - using repository references for common assumptions
+  assumptionRefs: [
     {
-      id: 'recursive-improvement',
-      category: 'technical',
-      description:
-        'Recursive self-improvement through RL on coding tasks produces super-exponential capability growth',
+      assumptionId: 'recursive-self-improvement',
       confidence: 'medium',
       impact: 'critical',
     },
     {
-      id: 'deceptive-alignment',
-      category: 'alignment',
-      description:
-        'Gradient descent during RL training can produce misaligned goals that remain hidden from lie detection and monitoring',
+      assumptionId: 'deceptive-alignment-possible',
       confidence: 'low',
       impact: 'critical',
     },
     {
-      id: 'control-failure',
-      category: 'safety',
-      description:
-        'Current security measures (NSA oversight, weight protection) insufficient to prevent AI takeover',
+      assumptionId: 'control-mechanisms-insufficient',
       confidence: 'low',
       impact: 'critical',
     },
     {
-      id: 'bioweapon-capability',
-      category: 'technical',
-      description: 'Superintelligent AI can develop novel bioweapons (mirror-life) capable of killing 97% of humanity',
+      assumptionId: 'bioweapon-capability',
       confidence: 'low',
       impact: 'critical',
     },
     {
-      id: 'government-response',
-      category: 'regulatory',
-      description:
-        'Government regulations and oversight lag behind capability growth and prioritize geopolitical competition',
+      assumptionId: 'government-response-lags',
       confidence: 'high',
       impact: 'high',
     },
   ],
+
+  // Keep inline assumptions for backward compatibility (empty for now)
+  assumptions: [],
 
   openQuestions: [
     'Could intermediate safety measures prevent the "Turn"?',
