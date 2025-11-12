@@ -114,7 +114,9 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
               return (
                 <div
                   key={usage.assumptionId}
-                  ref={(el) => el && assumptionRefs.current.set(usage.assumptionId, el)}
+                  ref={(el) => {
+                    if (el) assumptionRefs.current.set(usage.assumptionId, el);
+                  }}
                   className="assumption-card common"
                 >
                   <div className="assumption-header">
@@ -146,7 +148,9 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
                 return (
                   <div
                     key={usage.assumptionId}
-                    ref={(el) => el && assumptionRefs.current.set(usage.assumptionId, el)}
+                    ref={(el) => {
+                      if (el) assumptionRefs.current.set(usage.assumptionId, el);
+                    }}
                     className="assumption-card unique"
                   >
                     <div className="assumption-header">
