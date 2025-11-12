@@ -51,6 +51,20 @@ export interface TimelinePeriod {
 }
 
 /**
+ * A specific path within a branching scenario
+ */
+export interface BranchPath {
+  id: string;
+  name: string;
+  probability?: number; // optional probability estimate
+  description: string;
+  outcome: string;
+  periods: TimelinePeriod[];
+  milestones: Milestone[];
+  parameters?: ScenarioParameter[]; // Parameters specific to this branch path
+}
+
+/**
  * A branching point where the scenario splits into different paths
  */
 export interface Branch {
@@ -58,15 +72,7 @@ export interface Branch {
   branchDate: string;
   triggerCondition: string;
   description: string;
-  paths: {
-    id: string;
-    name: string;
-    probability?: number; // optional probability estimate
-    description: string;
-    outcome: string;
-    periods: TimelinePeriod[];
-    milestones: Milestone[];
-  }[];
+  paths: BranchPath[];
 }
 
 /**
