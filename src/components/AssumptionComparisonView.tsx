@@ -3,10 +3,9 @@
  * Shows which assumptions are common and which are unique
  */
 
-import { useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef, useState } from 'react';
 import type { FlexibleScenario } from '../types/scenario';
 import { getAllAssumptions } from '../utils/resolveAssumptions';
-import { ASSUMPTION_REPOSITORY } from '../data/repository';
 
 interface AssumptionComparisonViewProps {
   scenarios: FlexibleScenario[];
@@ -24,6 +23,8 @@ interface AssumptionUsage {
 
 export default function AssumptionComparisonView({ scenarios, focusedAssumptionId }: AssumptionComparisonViewProps) {
   const assumptionRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const categories = ['technical', 'alignment', 'safety', 'economic', 'geopolitical', 'regulatory', 'strategic'];
 
   const assumptionUsage = useMemo(() => {
     const usageMap = new Map<string, AssumptionUsage>();
@@ -59,10 +60,21 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
     return Array.from(usageMap.values()).sort((a, b) => b.count - a.count);
   }, [scenarios]);
 
-  const commonAssumptions = assumptionUsage.filter((a) => a.count > 1);
-  const uniqueAssumptions = assumptionUsage.filter((a) => a.count === 1);
-  const totalAssumptions = ASSUMPTION_REPOSITORY.length;
-  const usedAssumptions = assumptionUsage.length;
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    categories.forEach((c) => {
+      counts[c] = assumptionUsage.filter((a) => a.category === c).length;
+    });
+    return counts;
+  }, [assumptionUsage]);
+
+  const filteredAssumptionUsage = useMemo(() => {
+    if (!selectedCategory) return assumptionUsage;
+    return assumptionUsage.filter((a) => a.category === selectedCategory);
+  }, [assumptionUsage, selectedCategory]);
+
+  const commonAssumptions = filteredAssumptionUsage.filter((a) => a.count > 1);
+  const uniqueAssumptions = filteredAssumptionUsage.filter((a) => a.count === 1);
 
   // Scroll to focused assumption
   useEffect(() => {
@@ -81,25 +93,31 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
   return (
     <div className="assumption-comparison-view">
       <div className="comparison-header">
-        <h2>Assumption Analysis Across {scenarios.length} Scenarios</h2>
-        <div className="stats-summary">
-          <div className="stat-card">
-            <div className="stat-value">{totalAssumptions}</div>
-            <div className="stat-label">Total in Repository</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">{usedAssumptions}</div>
-            <div className="stat-label">Used in Scenarios</div>
-          </div>
-          <div className="stat-card highlight">
-            <div className="stat-value">{commonAssumptions.length}</div>
-            <div className="stat-label">Shared Assumptions</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">{uniqueAssumptions.length}</div>
-            <div className="stat-label">Unique Assumptions</div>
-          </div>
+        <div>
+          <h2>Assumption Analysis</h2>
+          <p className="subtitle">Across {scenarios.length} Scenarios</p>
         </div>
+      </div>
+
+      <div className="category-filter" style={{ marginBottom: '1rem' }}>
+        <button
+          className={`tag ${selectedCategory === null ? 'active' : ''}`}
+          onClick={() => setSelectedCategory(null)}
+        >
+          All <span className="count">{assumptionUsage.length}</span>
+        </button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={`tag ${selectedCategory === category ? 'active' : ''}`}
+            onClick={() =>
+              setSelectedCategory((prev) => (prev === category ? null : category))
+            }
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}{' '}
+            <span className="count">{categoryCounts[category] || 0}</span>
+          </button>
+        ))}
       </div>
 
       {commonAssumptions.length > 0 && (
@@ -163,27 +181,7 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
         </div>
       )}
 
-      <div className="category-breakdown">
-        <h3>📊 Breakdown by Category</h3>
-        <div className="category-grid">
-          {['technical', 'alignment', 'safety', 'economic', 'geopolitical', 'regulatory', 'strategic'].map(
-            (category) => {
-              const categoryAssumptions = assumptionUsage.filter((a) => a.category === category);
-              const commonCount = categoryAssumptions.filter((a) => a.count > 1).length;
-
-              return (
-                <div key={category} className="category-card">
-                  <h4>{category}</h4>
-                  <div className="category-stats">
-                    <div>Total: {categoryAssumptions.length}</div>
-                    <div>Common: {commonCount}</div>
-                  </div>
-                </div>
-              );
-            }
-          )}
-        </div>
-      </div>
+      
     </div>
   );
 }
