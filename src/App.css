@@ -11,6 +11,9 @@
 
 /* Assumption Comparison View Styles */
 .assumption-comparison-view {
+  background: #16213e;
+  border: 1px solid #2d3a5f;
+  border-radius: 16px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
