@@ -1,17 +1,27 @@
-import type { AIScenario } from '../../types/scenario';
+import type { AIScenario, FlexibleScenario } from '../../types/scenario';
+import { normalizeScenario } from '../../utils/repositoryConverter';
 import { takeoff2032 } from './takeoff-2032';
-import { aiTakeover2027 } from './ai-takeover-2027';
+// import { aiTakeover2027 } from './ai-takeover-2027'; // Old version - using refactored
 import { ai2027Forecast } from './ai-2027-forecast';
+import { aiTakeover2027Refactored } from './ai-takeover-2027-refactored';
 
 /**
  * Registry of all available AI forecast scenarios
+ * Supports both traditional inline scenarios and repository-based scenarios
  */
-export const scenarios: AIScenario[] = [
+const rawScenarios: FlexibleScenario[] = [
   takeoff2032,
-  aiTakeover2027,
+  // aiTakeover2027, // Commented out - using refactored version
+  aiTakeover2027Refactored,
   ai2027Forecast,
   // Add more scenarios here as they are created
 ];
+
+/**
+ * Normalized scenarios (all converted to traditional format)
+ * This ensures backward compatibility with existing components
+ */
+export const scenarios: AIScenario[] = rawScenarios.map(normalizeScenario);
 
 /**
  * Get a scenario by ID
