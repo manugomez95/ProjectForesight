@@ -9,6 +9,129 @@
   min-width: 0;
 }
 
+/* Assumption Comparison View Styles */
+.assumption-comparison-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.comparison-header h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #334155;
+}
+
+.stat-card.highlight {
+  border-color: #8b5cf6;
+  background: linear-gradient(135deg, #1e293b 0%, #2d1b4e 100%);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #8b5cf6;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.assumptions-section {
+  margin-bottom: 3rem;
+}
+
+.assumptions-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #e2e8f0;
+}
+
+.assumption-card.common {
+  border-left: 4px solid #8b5cf6;
+}
+
+.assumption-card.unique {
+  border-left: 4px solid #64748b;
+  opacity: 0.8;
+}
+
+.usage-badge {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.scenario-badge {
+  background: #475569;
+  color: #e2e8f0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.scenario-list {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.category-breakdown {
+  margin-top: 3rem;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.category-card {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 2px solid #334155;
+}
+
+.category-card h4 {
+  text-transform: capitalize;
+  color: #8b5cf6;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.category-stats {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.category-stats div {
+  margin: 0.25rem 0;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
