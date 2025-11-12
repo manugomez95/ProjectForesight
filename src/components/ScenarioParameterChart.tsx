@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ReferenceLine,
 } from 'recharts';
 import type { ScenarioParameter, AIScenario } from '../types/scenario';
 
@@ -93,16 +94,17 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
   // Create merged dataset with all dates
   const dateMap = new Map<string, any>();
 
-  // Add base data points
+  // Add base data to all paths (they share common history)
   baseData.forEach(point => {
-    dateMap.set(point.date, {
-      date: point.date,
-      base: point.value,
-      label: point.label,
+    const dataPoint: any = { date: point.date, label: point.label };
+    // Add this value to ALL branch paths since they share history before branching
+    branchPaths.forEach(path => {
+      dataPoint[path.id] = point.value;
     });
+    dateMap.set(point.date, dataPoint);
   });
 
-  // Add branch-specific data points
+  // Add branch-specific data points (after branching)
   branchPaths.forEach(path => {
     const pathParam = path.parameters?.find(p => p.id === parameter.id);
     if (pathParam) {
@@ -153,39 +155,41 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
           />
           <Legend
             formatter={(value: string) => {
-              if (value === 'base') return 'Common Timeline';
               const path = branchPaths.find(p => p.id === value);
               return path?.name || value;
             }}
           />
 
-          {/* Base line (common timeline before branching) */}
-          <Line
-            type="monotone"
-            dataKey="base"
-            stroke={parameter.color || '#8b5cf6'}
-            strokeWidth={2}
-            dot={{ fill: parameter.color || '#8b5cf6', r: 4 }}
-            activeDot={{ r: 6 }}
-            name="base"
-            connectNulls={false}
+          {/* Mark the branching point with a vertical line */}
+          <ReferenceLine
+            x={branchDate}
+            stroke="rgba(255,255,255,0.3)"
+            strokeDasharray="3 3"
+            label={{
+              value: '⚡ Branch',
+              position: 'top',
+              fill: 'rgba(255,255,255,0.6)',
+              fontSize: 11
+            }}
           />
 
-          {/* Branch path lines */}
-          {branchPaths.map((path) => (
-            <Line
-              key={path.id}
-              type="monotone"
-              dataKey={path.id}
-              stroke={BRANCH_COLORS[path.id] || path.id === 'branch-race' ? '#dc2626' : '#059669'}
-              strokeWidth={2}
-              strokeDasharray={path.id === 'branch-race' ? '5 5' : '0'}
-              dot={{ fill: BRANCH_COLORS[path.id] || '#8b5cf6', r: 4 }}
-              activeDot={{ r: 6 }}
-              name={path.id}
-              connectNulls={false}
-            />
-          ))}
+          {/* Render one continuous line per branch path */}
+          {branchPaths.map((path) => {
+            const pathColor = BRANCH_COLORS[path.id] || (path.id.includes('race') ? '#dc2626' : '#059669');
+            return (
+              <Line
+                key={path.id}
+                type="monotone"
+                dataKey={path.id}
+                stroke={pathColor}
+                strokeWidth={2.5}
+                dot={{ fill: pathColor, r: 4 }}
+                activeDot={{ r: 6 }}
+                name={path.id}
+                connectNulls={true}
+              />
+            );
+          })}
         </LineChart>
       </ResponsiveContainer>
 
