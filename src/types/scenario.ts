@@ -3,6 +3,8 @@
  * Designed to standardize different AI forecast scenarios for comparison and visualization
  */
 
+import type { ParameterReference, MilestoneReference } from './repository';
+
 /**
  * A specific point in time with associated metrics
  */
@@ -154,3 +156,28 @@ export interface ScenarioComparison {
     description: string;
   }[];
 }
+
+/**
+ * Repository-based parameter with data points
+ * References a parameter from the central repository and adds scenario-specific data
+ */
+export interface RepositoryParameter extends ParameterReference {
+  /** The actual data points for this scenario */
+  data: DataPoint[];
+}
+
+/**
+ * Repository-based scenario that uses centralized definitions
+ * This reduces duplication and ensures consistency across scenarios
+ */
+export interface RepositoryBasedScenario extends Omit<AIScenario, 'parameters' | 'milestones'> {
+  /** Parameters referenced from the repository */
+  parameterRefs: RepositoryParameter[];
+  /** Milestones referenced from the repository */
+  milestoneRefs: MilestoneReference[];
+}
+
+/**
+ * Helper type for scenarios that can use either inline or repository-based definitions
+ */
+export type FlexibleScenario = AIScenario | RepositoryBasedScenario;
