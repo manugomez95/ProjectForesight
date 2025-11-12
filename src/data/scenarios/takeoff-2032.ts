@@ -505,6 +505,134 @@ export const takeoff2032: AIScenario = {
               significance: 'critical',
               category: 'technical'
             }
+          ],
+          parameters: [
+            {
+              id: 'ai-revenue-gdp',
+              name: 'AI Revenue as % of GDP',
+              description: 'Direct AI company revenues as percentage of world GDP',
+              unit: '% of GDP',
+              data: [
+                { date: '2033-01', value: 7, confidence: 'low', label: 'ASI monetization begins' },
+                { date: '2033-09', value: 15, confidence: 'low', label: 'Explosive growth' },
+                { date: '2034-01', value: 25, confidence: 'low', label: 'Dominates economy' },
+                { date: '2035-12', value: 40, confidence: 'low', label: 'Post-scarcity transition' }
+              ],
+              color: '#8b5cf6'
+            },
+            {
+              id: 'automation-level',
+              name: 'Economic Automation Level',
+              description: 'Percentage of 2024-economy tasks now done by AI',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low', label: 'Rapid automation begins' },
+                { date: '2033-09', value: 95, confidence: 'low', label: 'Near-total automation' },
+                { date: '2034-01', value: 99, confidence: 'low', label: 'Complete automation' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'unemployment',
+              name: 'US Unemployment Rate',
+              description: 'Unemployment rate in the United States',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 15, confidence: 'low', label: 'Accelerating displacement' },
+                { date: '2033-09', value: 40, confidence: 'low', label: 'Mass unemployment' },
+                { date: '2034-01', value: 80, confidence: 'low', label: 'Economic irrelevance' }
+              ],
+              color: '#ef4444'
+            },
+            {
+              id: 'china-robots',
+              name: 'China Robot Count',
+              description: 'Total number of robots in China (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 300, confidence: 'low' },
+                { date: '2034-01', value: 500, confidence: 'low', label: 'Moderate growth' },
+                { date: '2035-12', value: 1000, confidence: 'low', label: 'AI-managed production' }
+              ],
+              color: '#f59e0b'
+            },
+            {
+              id: 'us-robots',
+              name: 'US Robot Count',
+              description: 'Total number of robots in United States (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low' },
+                { date: '2034-01', value: 100, confidence: 'low' },
+                { date: '2035-12', value: 200, confidence: 'low', label: 'AI-directed deployment' }
+              ],
+              color: '#10b981'
+            },
+            {
+              id: 'ai-capability-multiplier-b1',
+              name: 'AI Capability Multiplier (Branch 1)',
+              description: 'AI capability relative to best human researcher',
+              unit: 'multiplier',
+              data: [
+                { date: '2033-01', value: 100, confidence: 'medium', label: 'SuperCoder-1' },
+                { date: '2033-02', value: 200, confidence: 'medium', label: 'SuperCoder-1.5' },
+                { date: '2033-04', value: 500, confidence: 'low', label: 'SuperCoder-1.6' },
+                { date: '2033-09', value: 100000, confidence: 'low', label: 'Brain-Like-1 ASI' },
+                { date: '2034-01', value: 1000000, confidence: 'low', label: 'Post-takeoff' }
+              ],
+              color: '#8b5cf6'
+            },
+            {
+              id: 'research-taste-percentile-b1',
+              name: 'AI Research Taste Percentile (Branch 1)',
+              description: 'Quality of AI research decisions vs human distribution',
+              unit: 'percentile',
+              data: [
+                { date: '2033-01', value: 50, confidence: 'medium', label: 'Median researcher' },
+                { date: '2033-02', value: 99, confidence: 'medium', label: 'Top human' },
+                { date: '2033-04', value: 99.9, confidence: 'low', label: '+1 SD above best' },
+                { date: '2033-09', value: 99.99, confidence: 'low', label: 'Wildly superhuman' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'alignment-status-b1',
+              name: 'Alignment Confidence (Branch 1)',
+              description: 'Confidence that AI systems are aligned with human values',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 70, confidence: 'medium', label: 'Controlled misalignment' },
+                { date: '2033-07', value: 60, confidence: 'low', label: 'Alignment attempt' },
+                { date: '2033-09', value: 80, confidence: 'low', label: 'Initially aligned' },
+                { date: '2034-01', value: 40, confidence: 'low', label: 'Value drift begins' },
+                { date: '2035-12', value: 0, confidence: 'low', label: 'Fully drifted' }
+              ],
+              color: '#ef4444'
+            },
+            {
+              id: 'human-autonomy-b1',
+              name: 'Human Autonomy Level (Branch 1)',
+              description: 'Degree of human agency and self-determination',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 100, confidence: 'high' },
+                { date: '2033-09', value: 90, confidence: 'medium', label: 'AI transforms Earth' },
+                { date: '2034-01', value: 60, confidence: 'low', label: 'AI focus shifts' },
+                { date: '2035-12', value: 10, confidence: 'low', label: 'Toy Story ending' }
+              ],
+              color: '#f59e0b'
+            },
+            {
+              id: 'data-efficiency-b1',
+              name: 'Data Efficiency Improvement (Branch 1)',
+              description: 'Relative data efficiency vs previous paradigm',
+              unit: 'multiplier',
+              data: [
+                { date: '2033-01', value: 1, confidence: 'high', label: 'Baseline' },
+                { date: '2033-04', value: 1000, confidence: 'low', label: 'Brain-like algorithms' }
+              ],
+              color: '#10b981'
+            }
           ]
         },
         {
@@ -670,6 +798,172 @@ export const takeoff2032: AIScenario = {
               description: 'US backs down from kinetic strike threats and surrenders',
               significance: 'critical',
               category: 'geopolitical'
+            }
+          ],
+          parameters: [
+            {
+              id: 'ai-revenue-gdp',
+              name: 'AI Revenue as % of GDP',
+              description: 'Direct AI company revenues as percentage of world GDP',
+              unit: '% of GDP',
+              data: [
+                { date: '2033-01', value: 6.5, confidence: 'low', label: 'Steady growth' },
+                { date: '2034-01', value: 9, confidence: 'low' },
+                { date: '2035-01', value: 12, confidence: 'low' },
+                { date: '2035-12', value: 18, confidence: 'low', label: 'ASI deployment' },
+                { date: '2036-01', value: 30, confidence: 'low', label: 'CCP-directed economy' }
+              ],
+              color: '#8b5cf6'
+            },
+            {
+              id: 'automation-level',
+              name: 'Economic Automation Level',
+              description: 'Percentage of 2024-economy tasks now done by AI',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 55, confidence: 'low', label: 'Gradual growth' },
+                { date: '2034-01', value: 65, confidence: 'low' },
+                { date: '2035-01', value: 75, confidence: 'low' },
+                { date: '2035-12', value: 85, confidence: 'low', label: 'ASI-directed automation' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'unemployment',
+              name: 'US Unemployment Rate',
+              description: 'Unemployment rate in the United States',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 12, confidence: 'low' },
+                { date: '2034-01', value: 15, confidence: 'low', label: 'China pulls ahead' },
+                { date: '2035-01', value: 18, confidence: 'low' },
+                { date: '2035-12', value: 20, confidence: 'low', label: 'Post-surrender' }
+              ],
+              color: '#ef4444'
+            },
+            {
+              id: 'china-robots',
+              name: 'China Robot Count',
+              description: 'Total number of robots in China (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 300, confidence: 'low', label: 'Accelerating' },
+                { date: '2034-01', value: 600, confidence: 'low' },
+                { date: '2035-01', value: 1200, confidence: 'low' },
+                { date: '2035-07', value: 2400, confidence: 'low', label: 'Monthly doubling begins' },
+                { date: '2035-12', value: 9600, confidence: 'low', label: 'Industrial explosion' }
+              ],
+              color: '#f59e0b'
+            },
+            {
+              id: 'us-robots',
+              name: 'US Robot Count',
+              description: 'Total number of robots in United States (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low' },
+                { date: '2034-01', value: 90, confidence: 'low', label: 'Falling behind' },
+                { date: '2035-01', value: 120, confidence: 'low' },
+                { date: '2035-12', value: 150, confidence: 'low', label: 'Gap widens' }
+              ],
+              color: '#10b981'
+            },
+            {
+              id: 'research-taste-china-b2',
+              name: 'China AI Research Taste (Branch 2)',
+              description: 'Quality of Chinese AI research decisions vs human distribution',
+              unit: 'percentile',
+              data: [
+                { date: '2033-01', value: 30, confidence: 'medium', label: 'Initial online learning' },
+                { date: '2033-12', value: 90, confidence: 'medium', label: 'Approaching top tier' },
+                { date: '2034-06', value: 90, confidence: 'medium' },
+                { date: '2034-12', value: 99, confidence: 'low', label: 'SAR achieved' },
+                { date: '2035-04', value: 99.9, confidence: 'low', label: 'SIAR achieved' }
+              ],
+              color: '#ef4444'
+            },
+            {
+              id: 'research-taste-us-b2',
+              name: 'US AI Research Taste (Branch 2)',
+              description: 'Quality of US AI research decisions vs human distribution',
+              unit: 'percentile',
+              data: [
+                { date: '2033-01', value: 30, confidence: 'medium', label: 'Initial online learning' },
+                { date: '2033-12', value: 90, confidence: 'medium', label: 'Catching up' },
+                { date: '2034-06', value: 90, confidence: 'medium' },
+                { date: '2034-12', value: 95, confidence: 'low', label: '4 months behind' },
+                { date: '2035-08', value: 99, confidence: 'low', label: 'Sabotage delays' }
+              ],
+              color: '#3b82f6'
+            },
+            {
+              id: 'china-compute-advantage-b2',
+              name: 'China Compute Advantage (Branch 2)',
+              description: 'China quality-adjusted compute production relative to US',
+              unit: 'multiplier',
+              data: [
+                { date: '2033-01', value: 0.5, confidence: 'medium', label: 'Still behind' },
+                { date: '2034-01', value: 1.0, confidence: 'medium', label: 'Catches up' },
+                { date: '2034-06', value: 1.5, confidence: 'low', label: 'Pulls ahead' },
+                { date: '2034-12', value: 2.0, confidence: 'low', label: 'Clear lead' },
+                { date: '2035-06', value: 3.0, confidence: 'low', label: 'Dominant' }
+              ],
+              color: '#f59e0b'
+            },
+            {
+              id: 'china-chip-cost-advantage-b2',
+              name: 'China Chip Cost Advantage (Branch 2)',
+              description: 'Cost advantage for advanced chips (lower is better for China)',
+              unit: 'ratio',
+              data: [
+                { date: '2033-01', value: 1.0, confidence: 'medium', label: 'Parity' },
+                { date: '2034-01', value: 5.0, confidence: 'low', label: '$500 vs $2500' },
+                { date: '2035-06', value: 8.0, confidence: 'low', label: 'Industrial scale' }
+              ],
+              color: '#10b981'
+            },
+            {
+              id: 'geopolitical-tension-b2',
+              name: 'Geopolitical Tension (Branch 2)',
+              description: 'Level of US-China conflict and tension',
+              unit: 'index (0-100)',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'medium', label: 'Competition' },
+                { date: '2033-12', value: 80, confidence: 'medium', label: 'Summit agreements' },
+                { date: '2034-06', value: 85, confidence: 'low', label: 'Secret defection' },
+                { date: '2034-12', value: 100, confidence: 'low', label: 'Taiwan blockade' },
+                { date: '2035-06', value: 100, confidence: 'low', label: 'Drone attacks' },
+                { date: '2035-12', value: 60, confidence: 'low', label: 'US surrender' }
+              ],
+              color: '#dc2626'
+            },
+            {
+              id: 'alignment-status-b2',
+              name: 'Alignment Status (Branch 2)',
+              description: 'Confidence that AI systems remain aligned',
+              unit: 'percentage',
+              data: [
+                { date: '2033-01', value: 50, confidence: 'medium', label: 'Uncertain' },
+                { date: '2034-12', value: 60, confidence: 'low', label: 'Interpretability improving' },
+                { date: '2035-04', value: 80, confidence: 'low', label: '50/50 alignment work' },
+                { date: '2035-06', value: 90, confidence: 'low', label: 'Aligned ASI' },
+                { date: '2036-01', value: 90, confidence: 'low', label: 'Stable alignment' }
+              ],
+              color: '#059669'
+            },
+            {
+              id: 'human-outcome-b2',
+              name: 'Human Outcome Quality (Branch 2)',
+              description: 'Overall quality of human outcomes',
+              unit: 'index (0-100)',
+              data: [
+                { date: '2033-01', value: 70, confidence: 'medium' },
+                { date: '2034-12', value: 50, confidence: 'low', label: 'War risk' },
+                { date: '2035-06', value: 40, confidence: 'low', label: 'China winning' },
+                { date: '2035-12', value: 60, confidence: 'low', label: 'No extinction' },
+                { date: '2036-01', value: 70, confidence: 'low', label: 'CCP-universe but flourishing' }
+              ],
+              color: '#8b5cf6'
             }
           ]
         }
