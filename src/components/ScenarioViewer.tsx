@@ -51,7 +51,7 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
               <div className="branches-section">
                 <h3>Scenario Branches</h3>
                 {scenario.branches.map((branch) => (
-                  <BranchingView key={branch.id} branch={branch} />
+                  <BranchingView key={branch.id} branch={branch} scenario={scenario} />
                 ))}
               </div>
             )}
@@ -63,7 +63,7 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
             <h3>Tracked Parameters</h3>
             <div className="parameters-grid">
               {scenario.parameters.map((parameter) => (
-                <ScenarioParameterChart key={parameter.id} parameter={parameter} />
+                <ScenarioParameterChart key={parameter.id} parameter={parameter} scenario={scenario} />
               ))}
             </div>
           </div>

@@ -1,13 +1,16 @@
-import type { Branch } from '../types/scenario';
+import type { Branch, AIScenario } from '../types/scenario';
 import { useState } from 'react';
 import TimelineView from './TimelineView';
+import ScenarioParameterChart from './ScenarioParameterChart';
 
 interface BranchingViewProps {
   branch: Branch;
+  scenario?: AIScenario;
 }
 
-export default function BranchingView({ branch }: BranchingViewProps) {
+export default function BranchingView({ branch, scenario }: BranchingViewProps) {
   const [selectedPath, setSelectedPath] = useState<string>(branch.paths[0].id);
+  const [viewMode, setViewMode] = useState<'timeline' | 'parameters'>('timeline');
 
   const currentPath = branch.paths.find(p => p.id === selectedPath);
 
@@ -61,13 +64,48 @@ export default function BranchingView({ branch }: BranchingViewProps) {
             <p>{currentPath.outcome}</p>
           </div>
 
-          <div className="path-timeline">
-            <TimelineView
-              periods={currentPath.periods}
-              milestones={currentPath.milestones}
-              branchName={currentPath.name}
-            />
-          </div>
+          {/* View mode selector */}
+          {currentPath.parameters && currentPath.parameters.length > 0 && (
+            <div className="branch-view-mode-selector">
+              <button
+                className={`view-mode-button ${viewMode === 'timeline' ? 'active' : ''}`}
+                onClick={() => setViewMode('timeline')}
+              >
+                📅 Timeline
+              </button>
+              <button
+                className={`view-mode-button ${viewMode === 'parameters' ? 'active' : ''}`}
+                onClick={() => setViewMode('parameters')}
+              >
+                📊 Parameters
+              </button>
+            </div>
+          )}
+
+          {viewMode === 'timeline' && (
+            <div className="path-timeline">
+              <TimelineView
+                periods={currentPath.periods}
+                milestones={currentPath.milestones}
+                branchName={currentPath.name}
+              />
+            </div>
+          )}
+
+          {viewMode === 'parameters' && currentPath.parameters && (
+            <div className="path-parameters">
+              <h4>Parameters for this path</h4>
+              <div className="parameters-grid">
+                {currentPath.parameters.map((parameter) => (
+                  <ScenarioParameterChart
+                    key={parameter.id}
+                    parameter={parameter}
+                    scenario={scenario}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

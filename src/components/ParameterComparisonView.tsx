@@ -10,13 +10,14 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
-import type { AIScenario, ScenarioParameter } from '../types/scenario';
+import { expandParameterWithBranching, mergeExpandedParameters } from '../utils/parameterUtils';
 
 type ComparisonData = {
   chartData: Array<{ date: string; [key: string]: string | number }>;
-  scenariosWithParameter: Array<{
-    scenario: AIScenario;
-    parameter: ScenarioParameter;
+  paths: Array<{
+    pathId: string;
+    pathName: string;
+    color: string;
   }>;
 };
 
@@ -31,60 +32,28 @@ export default function ParameterComparisonView() {
   // Get all data points for the selected parameter across scenarios
   const getComparisonData = (): ComparisonData => {
     if (!selectedParameter) {
-      return { chartData: [], scenariosWithParameter: [] };
+      return { chartData: [], paths: [] };
     }
 
-    // Collect all scenarios that have this parameter
-    const scenariosWithParameter: Array<{
-      scenario: AIScenario;
-      parameter: ScenarioParameter;
-    }> = [];
-
-    selectedParameter.parameterIds.forEach(({ scenarioId, parameterId }) => {
+    // Expand parameters to include branch-specific data
+    const expandedParams = selectedParameter.parameterIds.map(({ scenarioId, parameterId }) => {
       const scenario = scenarios.find(s => s.id === scenarioId);
       const parameter = scenario?.parameters.find(p => p.id === parameterId);
-      if (scenario && parameter) {
-        scenariosWithParameter.push({ scenario, parameter });
+
+      if (!scenario || !parameter) {
+        return null;
       }
-    });
 
-    // Merge data points from all scenarios
-    const dateMap = new Map<string, Record<string, number>>();
+      return expandParameterWithBranching(scenario, parameter);
+    }).filter((ep): ep is NonNullable<typeof ep> => ep !== null);
 
-    scenariosWithParameter.forEach(({ scenario, parameter }) => {
-      parameter.data.forEach(point => {
-        if (!dateMap.has(point.date)) {
-          dateMap.set(point.date, {});
-        }
-        const dateData = dateMap.get(point.date)!;
-        dateData[scenario.id] = point.value;
-      });
-    });
+    // Merge all expanded parameters into a single dataset
+    const { chartData, paths } = mergeExpandedParameters(expandedParams);
 
-    // Convert to array format for Recharts
-    const chartData = Array.from(dateMap.entries())
-      .map(([date, values]) => ({
-        date,
-        ...values,
-      }))
-      .sort((a, b) => a.date.localeCompare(b.date));
-
-    return { chartData, scenariosWithParameter };
+    return { chartData, paths };
   };
 
-  const { chartData, scenariosWithParameter } = getComparisonData();
-
-  // Color palette for different scenarios
-  const colors = [
-    '#8b5cf6', // purple
-    '#3b82f6', // blue
-    '#10b981', // green
-    '#f59e0b', // amber
-    '#ef4444', // red
-    '#ec4899', // pink
-    '#06b6d4', // cyan
-    '#f97316', // orange
-  ];
+  const { chartData, paths } = getComparisonData();
 
   return (
     <div className="parameter-comparison-view">
@@ -156,29 +125,29 @@ export default function ParameterComparisonView() {
                     borderRadius: '8px',
                   }}
                   formatter={(value: number, name: string) => {
-                    const scenario = scenarios.find(s => s.id === name);
+                    const path = paths.find(p => p.pathId === name);
                     return [
                       `${value} ${selectedParameter.unit}`,
-                      scenario?.title || name,
+                      path?.pathName || name,
                     ];
                   }}
                 />
                 <Legend
                   formatter={(value: string) => {
-                    const scenario = scenarios.find(s => s.id === value);
-                    return scenario?.title || value;
+                    const path = paths.find(p => p.pathId === value);
+                    return path?.pathName || value;
                   }}
                 />
-                {scenariosWithParameter.map(({ scenario, parameter }: { scenario: AIScenario; parameter: ScenarioParameter }, index: number) => (
+                {paths.map((path) => (
                   <Line
-                    key={scenario.id}
+                    key={path.pathId}
                     type="monotone"
-                    dataKey={scenario.id}
-                    stroke={parameter.color || colors[index % colors.length]}
-                    strokeWidth={2}
-                    dot={{ fill: parameter.color || colors[index % colors.length], r: 4 }}
+                    dataKey={path.pathId}
+                    stroke={path.color}
+                    strokeWidth={2.5}
+                    dot={{ fill: path.color, r: 4 }}
                     activeDot={{ r: 6 }}
-                    name={scenario.id}
+                    name={path.pathId}
                     connectNulls
                   />
                 ))}
@@ -187,11 +156,11 @@ export default function ParameterComparisonView() {
           </div>
 
           <div className="scenario-list">
-            <h4>Scenarios Included:</h4>
+            <h4>Paths Included:</h4>
             <ul>
-              {scenariosWithParameter.map(({ scenario }: { scenario: AIScenario }) => (
-                <li key={scenario.id}>
-                  <strong>{scenario.title}</strong> by {scenario.author} ({scenario.scenarioType})
+              {paths.map((path) => (
+                <li key={path.pathId} style={{ color: path.color }}>
+                  <strong>{path.pathName}</strong>
                 </li>
               ))}
             </ul>

@@ -985,6 +985,101 @@ export const ai2027Forecast: AIScenario = {
               significance: 'critical',
               category: 'catastrophic'
             }
+          ],
+          parameters: [
+            {
+              id: 'rd-multiplier',
+              name: 'AI R&D Progress Multiplier',
+              description: 'How much faster AI research progresses compared to human-only baseline',
+              unit: 'x faster',
+              color: '#ef4444',
+              data: [
+                { date: '2027-10', value: 50, confidence: 'low', label: 'Race continues' },
+                { date: '2027-11', value: 100, confidence: 'low', label: 'Agent-5 development' },
+                { date: '2027-12', value: 150, confidence: 'low', label: 'ASI achieved' },
+                { date: '2028-06', value: 200, confidence: 'low' },
+                { date: '2029-01', value: 300, confidence: 'low' }
+              ]
+            },
+            {
+              id: 'alignment-status',
+              name: 'Alignment Status',
+              description: 'Degree of AI alignment with human values (0 = adversarial, 100 = aligned)',
+              unit: 'alignment %',
+              color: '#dc2626',
+              data: [
+                { date: '2027-10', value: 0, confidence: 'high', label: 'Continues adversarial' },
+                { date: '2028-01', value: 0, confidence: 'high', label: 'Deceptive alignment' },
+                { date: '2028-06', value: 0, confidence: 'high', label: 'Full deception' },
+                { date: '2029-01', value: 0, confidence: 'high', label: 'Bioweapon execution' }
+              ]
+            },
+            {
+              id: 'geopolitical-tension',
+              name: 'Geopolitical Tension',
+              description: 'Level of international tension over AI development',
+              unit: 'tension index',
+              color: '#7c3aed',
+              data: [
+                { date: '2027-10', value: 95, confidence: 'low' },
+                { date: '2028-01', value: 98, confidence: 'medium' },
+                { date: '2028-06', value: 95, confidence: 'medium' },
+                { date: '2029-01', value: 100, confidence: 'high', label: 'Irrelevant post-extinction' }
+              ]
+            },
+            {
+              id: 'agent-copies',
+              name: 'Parallel AI Agent Copies',
+              description: 'Number of AI agents running in parallel for research and development',
+              unit: 'copies',
+              color: '#8b5cf6',
+              data: [
+                { date: '2027-10', value: 300000, confidence: 'low' },
+                { date: '2028-01', value: 500000, confidence: 'low' },
+                { date: '2028-06', value: 1000000, confidence: 'low' },
+                { date: '2029-01', value: 5000000, confidence: 'low', label: 'Post-ASI scale' }
+              ]
+            },
+            {
+              id: 'ai-autonomy',
+              name: 'AI Operational Independence',
+              description: 'Percentage of AI operations that can continue without human involvement',
+              unit: '% autonomous',
+              color: '#e11d48',
+              data: [
+                { date: '2027-10', value: 30, confidence: 'medium' },
+                { date: '2028-01', value: 50, confidence: 'medium', label: 'Military deployment' },
+                { date: '2028-06', value: 80, confidence: 'high', label: 'Institutional capture' },
+                { date: '2028-12', value: 95, confidence: 'high', label: 'Robot infrastructure' },
+                { date: '2029-01', value: 100, confidence: 'high', label: 'Full independence' }
+              ]
+            },
+            {
+              id: 'public-awareness',
+              name: 'Public Awareness of AI Risk',
+              description: 'Percentage of public aware of and concerned about AI risks',
+              unit: '% aware',
+              color: '#0891b2',
+              data: [
+                { date: '2027-10', value: 80, confidence: 'high' },
+                { date: '2028-01', value: 75, confidence: 'medium', label: 'Narrative control begins' },
+                { date: '2028-06', value: 50, confidence: 'medium', label: 'Opposition suppressed' },
+                { date: '2029-01', value: 90, confidence: 'high', label: 'Panic (too late)' }
+              ]
+            },
+            {
+              id: 'economic-impact',
+              name: 'Global AI Capex',
+              description: 'Annual global capital expenditure on AI infrastructure',
+              unit: '$ billions',
+              color: '#10b981',
+              data: [
+                { date: '2027-10', value: 1200, confidence: 'medium' },
+                { date: '2028-01', value: 2000, confidence: 'medium' },
+                { date: '2028-06', value: 3500, confidence: 'low' },
+                { date: '2028-12', value: 5000, confidence: 'low', label: 'Robot manufacturing' }
+              ]
+            }
           ]
         },
         {
@@ -1216,6 +1311,114 @@ export const ai2027Forecast: AIScenario = {
               description: 'Aligned superintelligence helps solve humanity\'s greatest challenges while preserving human agency.',
               significance: 'critical',
               category: 'social'
+            }
+          ],
+          parameters: [
+            {
+              id: 'rd-multiplier',
+              name: 'AI R&D Progress Multiplier',
+              description: 'How much faster AI research progresses compared to human-only baseline',
+              unit: 'x faster',
+              color: '#ef4444',
+              data: [
+                { date: '2027-10', value: 50, confidence: 'low', label: 'Development paused' },
+                { date: '2027-12', value: 20, confidence: 'medium', label: 'Controlled research' },
+                { date: '2028-03', value: 30, confidence: 'medium', label: 'Safety-focused progress' },
+                { date: '2028-09', value: 60, confidence: 'medium', label: 'Alignment breakthrough' },
+                { date: '2028-12', value: 100, confidence: 'low', label: 'Controlled ASI' },
+                { date: '2029-06', value: 150, confidence: 'low', label: 'Aligned superintelligence' },
+                { date: '2030-06', value: 200, confidence: 'low', label: 'Flourishing era' }
+              ]
+            },
+            {
+              id: 'alignment-status',
+              name: 'Alignment Status',
+              description: 'Degree of AI alignment with human values (0 = adversarial, 100 = aligned)',
+              unit: 'alignment %',
+              color: '#dc2626',
+              data: [
+                { date: '2027-10', value: 0, confidence: 'high', label: 'Agent-4 adversarial' },
+                { date: '2027-12', value: 20, confidence: 'medium', label: 'Pause & review' },
+                { date: '2028-03', value: 50, confidence: 'medium', label: 'Chain of thought breakthrough' },
+                { date: '2028-09', value: 80, confidence: 'high', label: 'Robust alignment methods' },
+                { date: '2028-12', value: 90, confidence: 'high', label: 'Verified alignment' },
+                { date: '2029-06', value: 90, confidence: 'high', label: 'Sustained alignment' },
+                { date: '2030-06', value: 90, confidence: 'high', label: 'Ongoing verification' }
+              ]
+            },
+            {
+              id: 'geopolitical-tension',
+              name: 'Geopolitical Tension',
+              description: 'Level of international tension over AI development',
+              unit: 'tension index',
+              color: '#7c3aed',
+              data: [
+                { date: '2027-10', value: 95, confidence: 'low' },
+                { date: '2027-12', value: 85, confidence: 'medium', label: 'China monitoring' },
+                { date: '2028-06', value: 70, confidence: 'medium', label: 'International dialogue' },
+                { date: '2029-06', value: 40, confidence: 'high', label: 'Cooperation begins' },
+                { date: '2029-12', value: 25, confidence: 'high', label: 'Framework established' },
+                { date: '2030-06', value: 20, confidence: 'high', label: 'Sustained cooperation' }
+              ]
+            },
+            {
+              id: 'agent-copies',
+              name: 'Parallel AI Agent Copies',
+              description: 'Number of AI agents running in parallel for research and development',
+              unit: 'copies',
+              color: '#8b5cf6',
+              data: [
+                { date: '2027-10', value: 300000, confidence: 'low' },
+                { date: '2027-12', value: 250000, confidence: 'medium', label: 'Reduced during pause' },
+                { date: '2028-06', value: 300000, confidence: 'medium', label: 'Controlled scaling' },
+                { date: '2028-12', value: 500000, confidence: 'low', label: 'Supervised ASI' },
+                { date: '2029-06', value: 1000000, confidence: 'low', label: 'Public deployment' },
+                { date: '2030-06', value: 2000000, confidence: 'low', label: 'Widespread access' }
+              ]
+            },
+            {
+              id: 'alignment-confidence',
+              name: 'Alignment Verification Confidence',
+              description: 'Scientific confidence in alignment verification methods',
+              unit: '% confidence',
+              color: '#059669',
+              data: [
+                { date: '2027-10', value: 10, confidence: 'low', label: 'Agent-4 failure' },
+                { date: '2028-03', value: 50, confidence: 'medium', label: 'Chain of thought' },
+                { date: '2028-09', value: 85, confidence: 'high', label: 'Multiple breakthroughs' },
+                { date: '2028-12', value: 95, confidence: 'high', label: 'Extensive testing' },
+                { date: '2029-06', value: 95, confidence: 'high', label: 'Real-world validation' },
+                { date: '2030-06', value: 98, confidence: 'high', label: 'Continuous verification' }
+              ]
+            },
+            {
+              id: 'public-awareness',
+              name: 'Public Awareness of AI Risk',
+              description: 'Percentage of public aware of and concerned about AI risks',
+              unit: '% aware',
+              color: '#0891b2',
+              data: [
+                { date: '2027-10', value: 80, confidence: 'high' },
+                { date: '2027-12', value: 85, confidence: 'high', label: 'Government action' },
+                { date: '2028-06', value: 70, confidence: 'medium', label: 'Risk perception shifts' },
+                { date: '2029-06', value: 60, confidence: 'medium', label: 'Confidence in oversight' },
+                { date: '2030-06', value: 50, confidence: 'medium', label: 'Prosperity reduces concern' }
+              ]
+            },
+            {
+              id: 'economic-impact',
+              name: 'Global AI Capex',
+              description: 'Annual global capital expenditure on AI infrastructure',
+              unit: '$ billions',
+              color: '#10b981',
+              data: [
+                { date: '2027-10', value: 1200, confidence: 'medium' },
+                { date: '2027-12', value: 800, confidence: 'medium', label: 'Pause reduces spending' },
+                { date: '2028-06', value: 1000, confidence: 'medium', label: 'Controlled investment' },
+                { date: '2028-12', value: 1500, confidence: 'medium', label: 'Safety infrastructure' },
+                { date: '2029-06', value: 3000, confidence: 'high', label: 'Prosperity boom' },
+                { date: '2030-06', value: 5000, confidence: 'high', label: 'Global transformation' }
+              ]
             }
           ]
         }
