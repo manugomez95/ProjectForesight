@@ -707,11 +707,12 @@ export const ai2027Forecast: AIScenario = {
       impact: 'critical'
     },
     {
-      id: 'algorithmic-progress-accelerates',
+      id: 'recursive-self-improvement',
       category: 'technical',
-      description: 'AI-assisted AI research creates recursive improvement loop, achieving 1.5x → 4x → 10x → 25x → 50x R&D progress multipliers over ~18 months.',
+      description: 'AI-assisted AI research creates recursive improvement loop, leading to super-exponential capability growth. AI systems can effectively improve their own capabilities or train successor systems, achieving dramatic R&D progress multipliers.',
       confidence: 'medium',
-      impact: 'critical'
+      impact: 'critical',
+      note: 'Achieving 1.5x → 4x → 10x → 25x → 50x progress multipliers over ~18 months (Jan 2026 - Jun 2027)'
     },
     {
       id: 'alignment-difficulty',

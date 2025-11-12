@@ -4,6 +4,7 @@ import './App.css'
 import ScenarioSelector from './components/ScenarioSelector'
 import ScenarioViewer from './components/ScenarioViewer'
 import ParameterComparisonView from './components/ParameterComparisonView'
+import AssumptionComparisonView from './components/AssumptionComparisonView'
 import QuizView from './components/QuizView'
 import { scenarios } from './data/scenarios'
 import type { QuizAnswer } from './types/quiz'
@@ -11,7 +12,7 @@ import type { AIScenario } from './types/scenario'
 import { generateForecastFromQuiz } from './utils/generateForecast'
 import { getQuizAnswersFromUrl, createShareableUrl } from './utils/shareQuiz'
 
-type AppViewMode = 'scenario' | 'parameter' | 'quiz'
+type AppViewMode = 'scenario' | 'parameter' | 'assumptions' | 'quiz'
 
 function App() {
   const [viewMode, setViewMode] = useState<AppViewMode>('scenario')
@@ -22,8 +23,14 @@ function App() {
   const [quizAnswers, setQuizAnswers] = useState<QuizAnswer[] | null>(null)
   const [shareUrl, setShareUrl] = useState<string>('')
   const [copyButtonText, setCopyButtonText] = useState<string>('Copy Link')
+  const [focusedAssumptionId, setFocusedAssumptionId] = useState<string | undefined>(undefined)
 
   const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId)
+
+  const handleNavigateToAssumption = (assumptionId: string) => {
+    setFocusedAssumptionId(assumptionId)
+    setViewMode('assumptions')
+  }
 
   // Load quiz answers from URL on mount
   useEffect(() => {
@@ -84,6 +91,15 @@ function App() {
             Parameter Comparison
           </button>
           <button
+            className={`view-toggle-button ${viewMode === 'assumptions' ? 'active' : ''}`}
+            onClick={() => {
+              setFocusedAssumptionId(undefined);
+              setViewMode('assumptions');
+            }}
+          >
+            Assumption Analysis
+          </button>
+          <button
             className={`view-toggle-button ${viewMode === 'quiz' ? 'active' : ''}`}
             onClick={() => setViewMode('quiz')}
           >
@@ -115,7 +131,7 @@ function App() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <ScenarioViewer scenario={selectedScenario} />
+                <ScenarioViewer scenario={selectedScenario} onNavigateToAssumption={handleNavigateToAssumption} />
               </motion.section>
             )}
           </>
@@ -127,6 +143,15 @@ function App() {
             transition={{ delay: 0.1, duration: 0.5 }}
           >
             <ParameterComparisonView />
+          </motion.section>
+        ) : viewMode === 'assumptions' ? (
+          <motion.section
+            className="comparison-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
+            <AssumptionComparisonView scenarios={scenarios} focusedAssumptionId={focusedAssumptionId} />
           </motion.section>
         ) : (
           <motion.section
@@ -159,7 +184,7 @@ function App() {
                     </div>
                   )}
                 </div>
-                <ScenarioViewer scenario={quizForecast} />
+                <ScenarioViewer scenario={quizForecast} onNavigateToAssumption={handleNavigateToAssumption} />
                 <button
                   className="quiz-back-button"
                   onClick={() => {

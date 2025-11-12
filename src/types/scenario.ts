@@ -86,6 +86,7 @@ export interface Assumption {
   description: string;
   confidence: 'low' | 'medium' | 'high' | 'critical';
   impact: 'low' | 'medium' | 'high' | 'critical'; // impact if assumption is wrong
+  note?: string; // scenario-specific subtlety or detail
 }
 
 /**
@@ -175,6 +176,8 @@ export interface RepositoryBasedScenario extends Omit<AIScenario, 'parameters' |
   parameterRefs: RepositoryParameter[];
   /** Milestones referenced from the repository */
   milestoneRefs: MilestoneReference[];
+  /** Assumptions referenced from the repository (optional, for backward compatibility) */
+  assumptionRefs?: import('./repository').AssumptionReference[];
 }
 
 /**

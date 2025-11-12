@@ -74,6 +74,20 @@ export interface MetricDefinition extends RepositoryItemMetadata {
 }
 
 /**
+ * Assumption definition in the centralized repository
+ */
+export interface AssumptionDefinition extends RepositoryItemMetadata {
+  /** Category for grouping assumptions */
+  category: 'technical' | 'alignment' | 'safety' | 'economic' | 'geopolitical' | 'regulatory' | 'strategic';
+  /** Default confidence level */
+  defaultConfidence: 'low' | 'medium' | 'high' | 'critical';
+  /** Default impact if wrong */
+  defaultImpact: 'low' | 'medium' | 'high' | 'critical';
+  /** Related parameters that depend on this assumption */
+  relatedParameters?: string[];
+}
+
+/**
  * Reference to a parameter with scenario-specific overrides
  */
 export interface ParameterReference {
@@ -105,6 +119,20 @@ export interface MilestoneReference {
   significance: 'low' | 'medium' | 'high' | 'critical';
   /** Optional related metrics at this milestone */
   relatedMetrics?: Record<string, number>;
+}
+
+/**
+ * Reference to an assumption with scenario-specific overrides
+ */
+export interface AssumptionReference {
+  /** ID of the assumption in the repository */
+  assumptionId: string;
+  /** Optional scenario-specific note/subtlety (e.g., "over 18 months" for timing details) */
+  note?: string;
+  /** Scenario-specific confidence level (overrides default) */
+  confidence?: 'low' | 'medium' | 'high' | 'critical';
+  /** Scenario-specific impact level (overrides default) */
+  impact?: 'low' | 'medium' | 'high' | 'critical';
 }
 
 /**
