@@ -8,11 +8,12 @@ import { getAllParameters, getAllMilestones } from '../utils/resolveScenarioData
 
 interface ScenarioViewerProps {
   scenario: FlexibleScenario;
+  onNavigateToAssumption?: (assumptionId: string) => void;
 }
 
 type ViewMode = 'timeline' | 'parameters' | 'assumptions' | 'outcomes';
 
-export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
+export default function ScenarioViewer({ scenario, onNavigateToAssumption }: ScenarioViewerProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('timeline');
 
   // Resolve data from both inline and repository references
@@ -94,7 +95,12 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
             ) : (
               <div className="assumptions-list">
                 {assumptions.map((assumption) => (
-                  <div key={assumption.id} className="assumption-card">
+                  <div
+                    key={assumption.id}
+                    className="assumption-card clickable"
+                    onClick={() => onNavigateToAssumption?.(assumption.id)}
+                    style={{ cursor: onNavigateToAssumption ? 'pointer' : 'default' }}
+                  >
                     <div className="assumption-header">
                       <span className={`badge ${assumption.category}`}>
                         {assumption.category}
@@ -109,6 +115,11 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
                       </div>
                     </div>
                     <p className="assumption-description">{assumption.description}</p>
+                    {assumption.note && (
+                      <p className="assumption-note">
+                        <em>Note: {assumption.note}</em>
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

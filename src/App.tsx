@@ -23,8 +23,14 @@ function App() {
   const [quizAnswers, setQuizAnswers] = useState<QuizAnswer[] | null>(null)
   const [shareUrl, setShareUrl] = useState<string>('')
   const [copyButtonText, setCopyButtonText] = useState<string>('Copy Link')
+  const [focusedAssumptionId, setFocusedAssumptionId] = useState<string | undefined>(undefined)
 
   const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId)
+
+  const handleNavigateToAssumption = (assumptionId: string) => {
+    setFocusedAssumptionId(assumptionId)
+    setViewMode('assumptions')
+  }
 
   // Load quiz answers from URL on mount
   useEffect(() => {
@@ -122,7 +128,7 @@ function App() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <ScenarioViewer scenario={selectedScenario} />
+                <ScenarioViewer scenario={selectedScenario} onNavigateToAssumption={handleNavigateToAssumption} />
               </motion.section>
             )}
           </>
@@ -142,7 +148,7 @@ function App() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            <AssumptionComparisonView scenarios={scenarios} />
+            <AssumptionComparisonView scenarios={scenarios} focusedAssumptionId={focusedAssumptionId} />
           </motion.section>
         ) : (
           <motion.section
@@ -175,7 +181,7 @@ function App() {
                     </div>
                   )}
                 </div>
-                <ScenarioViewer scenario={quizForecast} />
+                <ScenarioViewer scenario={quizForecast} onNavigateToAssumption={handleNavigateToAssumption} />
                 <button
                   className="quiz-back-button"
                   onClick={() => {

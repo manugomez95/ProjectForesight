@@ -86,6 +86,7 @@ export interface Assumption {
   description: string;
   confidence: 'low' | 'medium' | 'high' | 'critical';
   impact: 'low' | 'medium' | 'high' | 'critical'; // impact if assumption is wrong
+  note?: string; // scenario-specific subtlety or detail
 }
 
 /**

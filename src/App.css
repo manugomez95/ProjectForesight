@@ -73,6 +73,34 @@
   opacity: 0.8;
 }
 
+.assumption-card.clickable:hover {
+  background: #334155;
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+.assumption-card.highlighted {
+  animation: highlight-pulse 2s ease-out;
+  border-color: #f59e0b !important;
+}
+
+@keyframes highlight-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.4);
+  }
+}
+
+.assumption-note {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
 .usage-badge {
   background: #8b5cf6;
   color: white;

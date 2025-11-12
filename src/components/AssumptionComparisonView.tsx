@@ -3,13 +3,14 @@
  * Shows which assumptions are common and which are unique
  */
 
-import { useMemo } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import type { FlexibleScenario } from '../types/scenario';
 import { getAllAssumptions } from '../utils/resolveAssumptions';
 import { ASSUMPTION_REPOSITORY } from '../data/repository';
 
 interface AssumptionComparisonViewProps {
   scenarios: FlexibleScenario[];
+  focusedAssumptionId?: string;
 }
 
 interface AssumptionUsage {
@@ -21,7 +22,9 @@ interface AssumptionUsage {
   count: number;
 }
 
-export default function AssumptionComparisonView({ scenarios }: AssumptionComparisonViewProps) {
+export default function AssumptionComparisonView({ scenarios, focusedAssumptionId }: AssumptionComparisonViewProps) {
+  const assumptionRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
   const assumptionUsage = useMemo(() => {
     const usageMap = new Map<string, AssumptionUsage>();
 
@@ -61,6 +64,20 @@ export default function AssumptionComparisonView({ scenarios }: AssumptionCompar
   const totalAssumptions = ASSUMPTION_REPOSITORY.length;
   const usedAssumptions = assumptionUsage.length;
 
+  // Scroll to focused assumption
+  useEffect(() => {
+    if (focusedAssumptionId) {
+      const element = assumptionRefs.current.get(focusedAssumptionId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.classList.add('highlighted');
+          setTimeout(() => element.classList.remove('highlighted'), 2000);
+        }, 100);
+      }
+    }
+  }, [focusedAssumptionId]);
+
   return (
     <div className="assumption-comparison-view">
       <div className="comparison-header">
@@ -95,7 +112,11 @@ export default function AssumptionComparisonView({ scenarios }: AssumptionCompar
                 .join(', ');
 
               return (
-                <div key={usage.assumptionId} className="assumption-card common">
+                <div
+                  key={usage.assumptionId}
+                  ref={(el) => el && assumptionRefs.current.set(usage.assumptionId, el)}
+                  className="assumption-card common"
+                >
                   <div className="assumption-header">
                     <span className={`badge ${usage.category}`}>{usage.category}</span>
                     <span className="usage-badge">
@@ -123,7 +144,11 @@ export default function AssumptionComparisonView({ scenarios }: AssumptionCompar
                 const scenario = scenarios.find((s) => s.id === usage.scenarios[0]);
 
                 return (
-                  <div key={usage.assumptionId} className="assumption-card unique">
+                  <div
+                    key={usage.assumptionId}
+                    ref={(el) => el && assumptionRefs.current.set(usage.assumptionId, el)}
+                    className="assumption-card unique"
+                  >
                     <div className="assumption-header">
                       <span className={`badge ${usage.category}`}>{usage.category}</span>
                       <span className="scenario-badge">{scenario?.title || usage.scenarios[0]}</span>

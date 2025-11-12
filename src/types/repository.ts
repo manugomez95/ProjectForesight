@@ -127,8 +127,8 @@ export interface MilestoneReference {
 export interface AssumptionReference {
   /** ID of the assumption in the repository */
   assumptionId: string;
-  /** Optional override for the description */
-  descriptionOverride?: string;
+  /** Optional scenario-specific note/subtlety (e.g., "over 18 months" for timing details) */
+  note?: string;
   /** Scenario-specific confidence level (overrides default) */
   confidence?: 'low' | 'medium' | 'high' | 'critical';
   /** Scenario-specific impact level (overrides default) */

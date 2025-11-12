@@ -20,9 +20,10 @@ export function resolveAssumptionRef(ref: AssumptionReference): Assumption | nul
   return {
     id: definition.id,
     category: definition.category,
-    description: ref.descriptionOverride || definition.description,
+    description: definition.description, // Always use repository description
     confidence: ref.confidence || definition.defaultConfidence,
     impact: ref.impact || definition.defaultImpact,
+    note: ref.note, // Add scenario-specific note
   };
 }
 
