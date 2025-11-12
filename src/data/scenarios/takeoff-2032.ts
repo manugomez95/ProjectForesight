@@ -508,6 +508,19 @@ export const takeoff2032: AIScenario = {
           ],
           parameters: [
             {
+              id: 'ai-revenue-gdp',
+              name: 'AI Revenue as % of GDP',
+              description: 'Direct AI company revenues as percentage of world GDP',
+              unit: '% of GDP',
+              data: [
+                { date: '2033-01', value: 7, confidence: 'low', label: 'ASI monetization begins' },
+                { date: '2033-09', value: 15, confidence: 'low', label: 'Explosive growth' },
+                { date: '2034-01', value: 25, confidence: 'low', label: 'Dominates economy' },
+                { date: '2035-12', value: 40, confidence: 'low', label: 'Post-scarcity transition' }
+              ],
+              color: '#8b5cf6'
+            },
+            {
               id: 'automation-level',
               name: 'Economic Automation Level',
               description: 'Percentage of 2024-economy tasks now done by AI',
@@ -530,6 +543,30 @@ export const takeoff2032: AIScenario = {
                 { date: '2034-01', value: 80, confidence: 'low', label: 'Economic irrelevance' }
               ],
               color: '#ef4444'
+            },
+            {
+              id: 'china-robots',
+              name: 'China Robot Count',
+              description: 'Total number of robots in China (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 300, confidence: 'low' },
+                { date: '2034-01', value: 500, confidence: 'low', label: 'Moderate growth' },
+                { date: '2035-12', value: 1000, confidence: 'low', label: 'AI-managed production' }
+              ],
+              color: '#f59e0b'
+            },
+            {
+              id: 'us-robots',
+              name: 'US Robot Count',
+              description: 'Total number of robots in United States (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low' },
+                { date: '2034-01', value: 100, confidence: 'low' },
+                { date: '2035-12', value: 200, confidence: 'low', label: 'AI-directed deployment' }
+              ],
+              color: '#10b981'
             },
             {
               id: 'ai-capability-multiplier-b1',
@@ -765,6 +802,20 @@ export const takeoff2032: AIScenario = {
           ],
           parameters: [
             {
+              id: 'ai-revenue-gdp',
+              name: 'AI Revenue as % of GDP',
+              description: 'Direct AI company revenues as percentage of world GDP',
+              unit: '% of GDP',
+              data: [
+                { date: '2033-01', value: 6.5, confidence: 'low', label: 'Steady growth' },
+                { date: '2034-01', value: 9, confidence: 'low' },
+                { date: '2035-01', value: 12, confidence: 'low' },
+                { date: '2035-12', value: 18, confidence: 'low', label: 'ASI deployment' },
+                { date: '2036-01', value: 30, confidence: 'low', label: 'CCP-directed economy' }
+              ],
+              color: '#8b5cf6'
+            },
+            {
               id: 'automation-level',
               name: 'Economic Automation Level',
               description: 'Percentage of 2024-economy tasks now done by AI',
@@ -796,13 +847,26 @@ export const takeoff2032: AIScenario = {
               description: 'Total number of robots in China (all types)',
               unit: 'millions',
               data: [
-                { date: '2033-01', value: 200, confidence: 'low', label: 'From main timeline' },
-                { date: '2034-01', value: 400, confidence: 'low' },
-                { date: '2035-01', value: 800, confidence: 'low' },
-                { date: '2035-07', value: 1600, confidence: 'low', label: 'Monthly doubling begins' },
-                { date: '2035-12', value: 6400, confidence: 'low', label: 'Industrial explosion' }
+                { date: '2033-01', value: 300, confidence: 'low', label: 'Accelerating' },
+                { date: '2034-01', value: 600, confidence: 'low' },
+                { date: '2035-01', value: 1200, confidence: 'low' },
+                { date: '2035-07', value: 2400, confidence: 'low', label: 'Monthly doubling begins' },
+                { date: '2035-12', value: 9600, confidence: 'low', label: 'Industrial explosion' }
               ],
               color: '#f59e0b'
+            },
+            {
+              id: 'us-robots',
+              name: 'US Robot Count',
+              description: 'Total number of robots in United States (all types)',
+              unit: 'millions',
+              data: [
+                { date: '2033-01', value: 60, confidence: 'low' },
+                { date: '2034-01', value: 90, confidence: 'low', label: 'Falling behind' },
+                { date: '2035-01', value: 120, confidence: 'low' },
+                { date: '2035-12', value: 150, confidence: 'low', label: 'Gap widens' }
+              ],
+              color: '#10b981'
             },
             {
               id: 'research-taste-china-b2',
