@@ -1,6 +1,7 @@
 import type { AIScenario } from '../../types/scenario';
 import { takeoff2032 } from './takeoff-2032';
 import { aiTakeover2027 } from './ai-takeover-2027';
+import { ai2027Forecast } from './ai-2027-forecast';
 
 /**
  * Registry of all available AI forecast scenarios
@@ -8,6 +9,7 @@ import { aiTakeover2027 } from './ai-takeover-2027';
 export const scenarios: AIScenario[] = [
   takeoff2032,
   aiTakeover2027,
+  ai2027Forecast,
   // Add more scenarios here as they are created
 ];
 
