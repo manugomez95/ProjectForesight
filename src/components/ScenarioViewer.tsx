@@ -51,7 +51,7 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
               <div className="branches-section">
                 <h3>Scenario Branches</h3>
                 {scenario.branches.map((branch) => (
-                  <BranchingView key={branch.id} branch={branch} scenario={scenario} />
+                  <BranchingView key={branch.id} branch={branch} />
                 ))}
               </div>
             )}
