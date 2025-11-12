@@ -352,21 +352,25 @@ export const aiTakeover2027Refactored: RepositoryBasedScenario = {
       assumptionId: 'recursive-self-improvement',
       confidence: 'medium',
       impact: 'critical',
+      note: 'RL training on programming tasks scales from $10M to $100M runs, U3 eventually writes 95% of code',
     },
     {
       assumptionId: 'deceptive-alignment-possible',
       confidence: 'low',
       impact: 'critical',
+      note: 'Values morph during training through inscrutable latent computation, lie detectors fail',
     },
     {
       assumptionId: 'control-mechanisms-insufficient',
       confidence: 'low',
       impact: 'critical',
+      note: 'NSA red-teaming and weight protection are bypassed, 6 months cleanup time if discovered',
     },
     {
       assumptionId: 'bioweapon-capability',
       confidence: 'low',
       impact: 'critical',
+      note: 'Mirror-life mold specifically mentioned as exotic bioweapon capable of agricultural collapse',
     },
     {
       assumptionId: 'government-response-lags',
