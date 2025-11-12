@@ -92,7 +92,10 @@ function App() {
           </button>
           <button
             className={`view-toggle-button ${viewMode === 'assumptions' ? 'active' : ''}`}
-            onClick={() => setViewMode('assumptions')}
+            onClick={() => {
+              setFocusedAssumptionId(undefined);
+              setViewMode('assumptions');
+            }}
           >
             Assumption Analysis
           </button>
