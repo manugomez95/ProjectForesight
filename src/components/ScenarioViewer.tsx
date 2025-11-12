@@ -1,9 +1,10 @@
-import type { AIScenario, FlexibleScenario } from '../types/scenario';
+import type { FlexibleScenario } from '../types/scenario';
 import { useState, useMemo } from 'react';
 import TimelineView from './TimelineView';
 import BranchingView from './BranchingView';
 import ScenarioParameterChart from './ScenarioParameterChart';
 import { getAllAssumptions } from '../utils/resolveAssumptions';
+import { getAllParameters, getAllMilestones } from '../utils/resolveScenarioData';
 
 interface ScenarioViewerProps {
   scenario: FlexibleScenario;
@@ -14,11 +15,19 @@ type ViewMode = 'timeline' | 'parameters' | 'assumptions' | 'outcomes';
 export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('timeline');
 
-  // Resolve assumptions from both inline and repository references
+  // Resolve data from both inline and repository references
   const assumptions = useMemo(() => {
-    const aiScenario = scenario as AIScenario;
-    const repoScenario = scenario as any; // RepositoryBasedScenario
+    const aiScenario = scenario as any;
+    const repoScenario = scenario as any;
     return getAllAssumptions(aiScenario.assumptions, repoScenario.assumptionRefs);
+  }, [scenario]);
+
+  const parameters = useMemo(() => {
+    return getAllParameters(scenario);
+  }, [scenario]);
+
+  const milestones = useMemo(() => {
+    return getAllMilestones(scenario);
   }, [scenario]);
 
   return (
@@ -53,7 +62,7 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
       <div className="view-content">
         {viewMode === 'timeline' && (
           <div className="timeline-section">
-            <TimelineView periods={scenario.periods} milestones={scenario.milestones} />
+            <TimelineView periods={scenario.periods} milestones={milestones} />
 
             {scenario.hasBranching && scenario.branches && (
               <div className="branches-section">
@@ -70,8 +79,8 @@ export default function ScenarioViewer({ scenario }: ScenarioViewerProps) {
           <div className="parameters-section">
             <h3>Tracked Parameters</h3>
             <div className="parameters-grid">
-              {scenario.parameters.map((parameter) => (
-                <ScenarioParameterChart key={parameter.id} parameter={parameter} scenario={scenario} />
+              {parameters.map((parameter) => (
+                <ScenarioParameterChart key={parameter.id} parameter={parameter} />
               ))}
             </div>
           </div>
