@@ -8,13 +8,6 @@ import type { MilestoneReference } from '../types/repository';
 import { getParameterDefinition, getMilestoneDefinition } from '../data/repository';
 
 /**
- * Check if a scenario is repository-based
- */
-function isRepositoryBased(scenario: FlexibleScenario): boolean {
-  return 'parameterRefs' in scenario || 'milestoneRefs' in scenario;
-}
-
-/**
  * Resolve a repository parameter reference into a full ScenarioParameter
  */
 function resolveParameterRef(ref: RepositoryParameter): ScenarioParameter | null {
