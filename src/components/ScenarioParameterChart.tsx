@@ -10,28 +10,16 @@ import {
   ReferenceLine,
 } from 'recharts';
 import type { ScenarioParameter, AIScenario } from '../types/scenario';
+import { createBranchingChartData } from '../utils/parameterUtils';
 
 interface ScenarioParameterChartProps {
   parameter: ScenarioParameter;
   scenario?: AIScenario;
 }
 
-// Branch path colors for consistent visualization
-const BRANCH_COLORS: Record<string, string> = {
-  'branch-race': '#dc2626', // Red for catastrophic race ending
-  'branch-slowdown': '#059669', // Green for prosperity ending
-};
-
 export default function ScenarioParameterChart({ parameter, scenario }: ScenarioParameterChartProps) {
-  // Check if this scenario has branching and if branch paths have parameters
-  const hasBranchingParameters =
-    scenario?.hasBranching &&
-    scenario.branches?.[0]?.paths.some(path =>
-      path.parameters?.some(p => p.id === parameter.id)
-    );
-
-  if (!hasBranchingParameters) {
-    // Simple case: no branching, render single line
+  if (!scenario) {
+    // No scenario provided, render simple chart
     const chartData = parameter.data.map((point) => ({
       date: point.date,
       value: point.value,
@@ -82,45 +70,54 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
     );
   }
 
-  // Complex case: branching scenario with diverging parameters
-  const branchDate = scenario.branches![0].branchDate;
+  // Use utility function to handle branching logic
+  const { chartData, branchPaths, branchDate } = createBranchingChartData(scenario, parameter);
 
-  // Get base parameter data (before branching)
-  const baseData = parameter.data.filter(point => point.date <= branchDate);
+  // Simple case: no branching
+  if (branchPaths.length === 0) {
+    return (
+      <div className="parameter-chart">
+        <div className="chart-header">
+          <h4>{parameter.name}</h4>
+          <p className="chart-description">{parameter.description}</p>
+        </div>
 
-  // Get branch paths and their parameters
-  const branchPaths = scenario.branches![0].paths;
-
-  // Create merged dataset with all dates
-  const dateMap = new Map<string, any>();
-
-  // Add base data to all paths (they share common history)
-  baseData.forEach(point => {
-    const dataPoint: any = { date: point.date, label: point.label };
-    // Add this value to ALL branch paths since they share history before branching
-    branchPaths.forEach(path => {
-      dataPoint[path.id] = point.value;
-    });
-    dateMap.set(point.date, dataPoint);
-  });
-
-  // Add branch-specific data points (after branching)
-  branchPaths.forEach(path => {
-    const pathParam = path.parameters?.find(p => p.id === parameter.id);
-    if (pathParam) {
-      pathParam.data.forEach(point => {
-        const existing = dateMap.get(point.date) || { date: point.date };
-        existing[path.id] = point.value;
-        existing[`${path.id}_label`] = point.label;
-        dateMap.set(point.date, existing);
-      });
-    }
-  });
-
-  // Convert to array and sort by date
-  const chartData = Array.from(dateMap.values()).sort((a, b) =>
-    a.date.localeCompare(b.date)
-  );
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+            <XAxis
+              dataKey="date"
+              stroke="rgba(255,255,255,0.5)"
+              style={{ fontSize: '12px' }}
+            />
+            <YAxis
+              stroke="rgba(255,255,255,0.5)"
+              style={{ fontSize: '12px' }}
+              label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '8px',
+              }}
+              formatter={(value: number) => [`${value} ${parameter.unit}`, parameter.name]}
+            />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={parameter.color || '#8b5cf6'}
+              strokeWidth={2}
+              dot={{ fill: parameter.color || '#8b5cf6', r: 4 }}
+              activeDot={{ r: 6 }}
+              name={parameter.name}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  }
 
   return (
     <div className="parameter-chart">
@@ -174,26 +171,23 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
           />
 
           {/* Render one continuous line per branch path */}
-          {branchPaths.map((path) => {
-            const pathColor = BRANCH_COLORS[path.id] || (path.id.includes('race') ? '#dc2626' : '#059669');
-            return (
-              <Line
-                key={path.id}
-                type="monotone"
-                dataKey={path.id}
-                stroke={pathColor}
-                strokeWidth={2.5}
-                dot={{ fill: pathColor, r: 4 }}
-                activeDot={{ r: 6 }}
-                name={path.id}
-                connectNulls={true}
-              />
-            );
-          })}
+          {branchPaths.map((path) => (
+            <Line
+              key={path.id}
+              type="monotone"
+              dataKey={path.id}
+              stroke={path.color}
+              strokeWidth={2.5}
+              dot={{ fill: path.color, r: 4 }}
+              activeDot={{ r: 6 }}
+              name={path.id}
+              connectNulls={true}
+            />
+          ))}
         </LineChart>
       </ResponsiveContainer>
 
-      {hasBranchingParameters && (
+      {branchDate && (
         <div className="branch-indicator" style={{
           marginTop: '8px',
           fontSize: '12px',
