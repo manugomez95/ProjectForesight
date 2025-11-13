@@ -153,17 +153,6 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     range: { min: 0, max: 50 },
     usesConfidence: true,
   },
-  {
-    id: 'economic-automation-level',
-    name: 'Economic Automation Level',
-    description: 'Overall level of economic automation across all sectors',
-    unit: '% automated',
-    color: '#f97316',
-    category: 'economic',
-    tags: ['economic', 'automation', 'productivity'],
-    range: { min: 0, max: 100 },
-    usesConfidence: true,
-  },
 
   // ============================================================================
   // GEOPOLITICAL PARAMETERS

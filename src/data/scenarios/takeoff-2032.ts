@@ -315,8 +315,8 @@ export const takeoff2032: AIScenario = {
     },
     {
       id: 'automation-level',
-      name: 'Economic Automation Level',
-      description: 'Percentage of 2024-economy tasks now done by AI',
+      name: 'Knowledge Worker Automation',
+      description: 'Percentage of knowledge work tasks automated by AI',
       unit: 'percentage',
       data: [
         { date: '2028', value: 10, confidence: 'medium' },
@@ -522,8 +522,8 @@ export const takeoff2032: AIScenario = {
             },
             {
               id: 'automation-level',
-              name: 'Economic Automation Level',
-              description: 'Percentage of 2024-economy tasks now done by AI',
+              name: 'Knowledge Worker Automation',
+              description: 'Percentage of knowledge work tasks automated by AI',
               unit: 'percentage',
               data: [
                 { date: '2033-01', value: 60, confidence: 'low', label: 'Rapid automation begins' },
@@ -817,8 +817,8 @@ export const takeoff2032: AIScenario = {
             },
             {
               id: 'automation-level',
-              name: 'Economic Automation Level',
-              description: 'Percentage of 2024-economy tasks now done by AI',
+              name: 'Knowledge Worker Automation',
+              description: 'Percentage of knowledge work tasks automated by AI',
               unit: 'percentage',
               data: [
                 { date: '2033-01', value: 55, confidence: 'low', label: 'Gradual growth' },
