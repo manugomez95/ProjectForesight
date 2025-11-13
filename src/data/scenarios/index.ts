@@ -4,6 +4,7 @@ import { takeoff2032 } from './takeoff-2032';
 // import { aiTakeover2027 } from './ai-takeover-2027'; // Old version - using refactored
 import { ai2027Forecast } from './ai-2027-forecast';
 import { aiTakeover2027Refactored } from './ai-takeover-2027-refactored';
+import { situationalAwareness } from './situational-awareness';
 
 /**
  * Registry of all available AI forecast scenarios
@@ -14,6 +15,7 @@ const rawScenarios: FlexibleScenario[] = [
   // aiTakeover2027, // Commented out - using refactored version
   aiTakeover2027Refactored,
   ai2027Forecast,
+  situationalAwareness,
   // Add more scenarios here as they are created
 ];
 
