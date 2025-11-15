@@ -605,34 +605,5 @@ export const situationalAwareness: AIScenario = {
     }
   ],
 
-  hasBranching: false,
-
-  tags: [
-    'AGI',
-    'superintelligence',
-    'scaling laws',
-    'compute',
-    'algorithmic progress',
-    'recursive improvement',
-    'intelligence explosion',
-    'infrastructure',
-    'trillion-dollar cluster',
-    'power constraints',
-    'security',
-    'Chinese espionage',
-    'alignment',
-    'RLHF',
-    'scalable oversight',
-    'geopolitics',
-    'US-China competition',
-    'government takeover',
-    'Manhattan Project',
-    'national security',
-    'Leopold Aschenbrenner',
-    '2027 timeline',
-    'OOMs',
-    'unhobbling',
-    'autonomous agents',
-    'automated research'
-  ]
+  hasBranching: false
 };

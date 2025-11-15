@@ -1041,18 +1041,5 @@ export const takeoff2032: AIScenario = {
       description: 'Branch 2 (Slow Takeoff): China wins with aligned ASI. Creates "CCP-universe" with 90% of galaxies under Confucian/Daoist governance, donates 10% to rest of world (>1 galaxy per person). Basic rights enforced, Earth becomes museum. Some US leaders punished but most people flourish.',
       winningActor: 'China'
     }
-  ],
-
-  tags: [
-    'us-china-competition',
-    'robotics',
-    'lithography',
-    'takeoff-speed',
-    'alignment',
-    'superhuman-coder',
-    'branching-scenario',
-    '2030s',
-    'modal-scenario',
-    'lesswrong'
   ]
 };

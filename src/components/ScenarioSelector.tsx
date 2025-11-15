@@ -80,16 +80,6 @@ export default function ScenarioSelector({
           <p>{selectedScenario.summary}</p>
         </div>
       )}
-
-      {selectedScenario && selectedScenario.tags.length > 0 && (
-        <div className="scenario-tags">
-          {selectedScenario.tags.map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
