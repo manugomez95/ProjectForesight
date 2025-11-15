@@ -742,16 +742,13 @@
 
 /* Branching View Styles */
 .branching-view {
-  margin-top: 3rem;
-  padding-top: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .branch-point {
-  border-left: 3px solid #8b5cf6;
-  padding: 1.5rem;
-  padding-left: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .branch-point-header {
@@ -831,10 +828,7 @@
 }
 
 .path-content {
-  padding: 2rem;
-  padding-left: 1.5rem;
-  border-left: 2px solid rgba(102, 126, 234, 0.3);
-  margin-left: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .path-header h3 {
@@ -849,10 +843,7 @@
 }
 
 .path-outcome {
-  padding: 1rem;
-  padding-left: 0.75rem;
-  border-left: 3px solid #8b5cf6;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .path-outcome h4 {
@@ -1837,8 +1828,8 @@
   }
 
   .branching-view {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
   }
 
   .branch-header {
@@ -1848,14 +1839,11 @@
   }
 
   .branch-point {
-    padding: 1rem;
-    padding-left: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .path-content {
-    padding: 1rem;
-    padding-left: 0.75rem;
-    margin-left: 0;
+    margin-top: 1rem;
   }
 }
 
@@ -1962,8 +1950,8 @@
   }
 
   .branching-view {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
   }
 
   .branch-header {
@@ -1973,20 +1961,15 @@
   }
 
   .branch-point {
-    padding: 0.75rem;
-    padding-left: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .path-content {
-    padding: 0.75rem;
-    padding-left: 0.5rem;
-    margin-left: 0;
+    margin-top: 1rem;
   }
 
   .path-outcome {
-    padding: 0.75rem;
-    padding-left: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .quiz-container,

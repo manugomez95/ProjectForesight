@@ -51,21 +51,21 @@ export default function BranchingView({ branch }: BranchingViewProps) {
 
       {currentPath && (
         <div className="path-content">
-          <div className="path-header">
-            <h3>{currentPath.name}</h3>
+          {currentPath.description && (
             <p className="path-description">{currentPath.description}</p>
-          </div>
+          )}
 
-          <div className="path-outcome">
-            <h4>Outcome:</h4>
-            <p>{currentPath.outcome}</p>
-          </div>
+          {currentPath.outcome && (
+            <div className="path-outcome">
+              <h4>Outcome:</h4>
+              <p>{currentPath.outcome}</p>
+            </div>
+          )}
 
           <div className="path-timeline">
             <TimelineView
               periods={currentPath.periods}
               milestones={currentPath.milestones}
-              branchName={currentPath.name}
             />
           </div>
         </div>
