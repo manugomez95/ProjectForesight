@@ -55,8 +55,7 @@ export function generateForecastFromQuiz(answers: QuizAnswer[]): AIScenario {
       'What role will international cooperation play in AI development and safety?',
       'How will society adapt to rapid technological changes?',
     ],
-    outcomes: outcome,
-    tags: ['quiz-generated', scenarioType, 'custom-forecast'],
+    outcomes: outcome
   };
 }
 

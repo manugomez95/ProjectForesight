@@ -33,22 +33,6 @@ export function getScenarioById(id: string): AIScenario | undefined {
 }
 
 /**
- * Get scenarios by tag
- */
-export function getScenariosByTag(tag: string): AIScenario[] {
-  return scenarios.filter(s => s.tags.includes(tag));
-}
-
-/**
- * Get all unique tags across all scenarios
- */
-export function getAllTags(): string[] {
-  const tagSet = new Set<string>();
-  scenarios.forEach(s => s.tags.forEach(tag => tagSet.add(tag)));
-  return Array.from(tagSet).sort();
-}
-
-/**
  * Get scenarios by type
  */
 export function getScenariosByType(type: AIScenario['scenarioType']): AIScenario[] {
