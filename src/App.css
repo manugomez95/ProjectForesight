@@ -413,21 +413,6 @@
   font-size: 1rem;
 }
 
-.scenario-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tag {
-  padding: 0.25rem 0.75rem;
-  background: rgba(102, 126, 234, 0.2);
-  border: 1px solid rgba(102, 126, 234, 0.4);
-  border-radius: 12px;
-  font-size: 0.85rem;
-  color: #a5b4fc;
-}
-
 .badge {
   padding: 0.25rem 0.75rem;
   border-radius: 12px;

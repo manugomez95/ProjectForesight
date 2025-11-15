@@ -1425,22 +1425,5 @@ export const ai2027Forecast: AIScenario = {
         }
       ]
     }
-  ],
-
-  tags: [
-    'modal',
-    'recursive-self-improvement',
-    'misalignment',
-    'adversarial-ai',
-    'geopolitical-competition',
-    'us-china',
-    'capability-growth',
-    'alignment-failure',
-    'government-response',
-    'public-awareness',
-    'compute-scaling',
-    'algorithmic-progress',
-    'intelligence-theft',
-    'superintelligence'
   ]
 };

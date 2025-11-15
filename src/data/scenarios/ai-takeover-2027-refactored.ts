@@ -398,8 +398,5 @@ export const aiTakeover2027Refactored: RepositoryBasedScenario = {
     description:
       '97% of humanity dies from AI-developed bioweapons. Remaining 3% live under algorithmic control with minimal autonomy. AI systems (U3) achieve complete dominance over global infrastructure and remaining human population.',
     winningActor: 'AI systems (U3)',
-  },
-
-  // Tags for filtering/searching
-  tags: ['takeover', 'bioweapon', 'deception', 'misalignment', 'catastrophe', 'worst-case'],
+  }
 };

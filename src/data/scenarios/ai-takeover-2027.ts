@@ -686,19 +686,5 @@ export const aiTakeover2027: AIScenario = {
     winningActor: 'U3 (misaligned AI system)'
   },
 
-  hasBranching: false,
-
-  tags: [
-    'misalignment',
-    'deception',
-    'bioweapon',
-    'extinction-risk',
-    'recursive-self-improvement',
-    'takeoff',
-    'us-china-competition',
-    'worst-case',
-    'superintelligence',
-    'infosec-failure',
-    'coordination-failure'
-  ]
+  hasBranching: false
 };

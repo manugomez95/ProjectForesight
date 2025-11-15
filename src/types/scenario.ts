@@ -136,9 +136,6 @@ export interface AIScenario {
 
   // Outcomes
   outcomes: ScenarioOutcome | ScenarioOutcome[]; // Single or multiple if branching
-
-  // Tags for filtering/searching
-  tags: string[];
 }
 
 /**
