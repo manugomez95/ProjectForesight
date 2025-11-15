@@ -518,7 +518,9 @@
   margin-bottom: 2rem;
   padding: 1rem;
   padding-left: 0.75rem;
+  background: rgba(139, 92, 246, 0.1);
   border-left: 3px solid #8b5cf6;
+  border-radius: 8px;
 }
 
 .branch-header h3 {
