@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -8,12 +7,15 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Scatter,
+  ComposedChart,
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
 import { expandParameterWithBranching, mergeExpandedParameters } from '../utils/parameterUtils';
 
 type ComparisonData = {
   chartData: Array<{ date: string; [key: string]: string | number }>;
+  metricData: Array<{ date: string; value: number; scenario: string }>;
   paths: Array<{
     pathId: string;
     pathName: string;
@@ -32,7 +34,7 @@ export default function ParameterComparisonView() {
   // Get all data points for the selected parameter across scenarios
   const getComparisonData = (): ComparisonData => {
     if (!selectedParameter) {
-      return { chartData: [], paths: [] };
+      return { chartData: [], metricData: [], paths: [] };
     }
 
     // Expand parameters to include branch-specific data
@@ -50,10 +52,46 @@ export default function ParameterComparisonView() {
     // Merge all expanded parameters into a single dataset
     const { chartData, paths } = mergeExpandedParameters(expandedParams);
 
-    return { chartData, paths };
+    // Extract metrics from timeline periods
+    const metricData: Array<{ date: string; value: number; scenario: string }> = [];
+
+    selectedParameter.parameterIds.forEach(({ scenarioId, parameterId }) => {
+      const scenario = scenarios.find(s => s.id === scenarioId);
+      if (!scenario) return;
+
+      // Extract metrics from main timeline periods
+      scenario.periods.forEach(period => {
+        if (period.metrics && period.metrics[parameterId] !== undefined) {
+          metricData.push({
+            date: period.startDate,
+            value: period.metrics[parameterId] as number,
+            scenario: scenario.title,
+          });
+        }
+      });
+
+      // Extract metrics from branch path periods
+      if (scenario.branches) {
+        scenario.branches.forEach(branch => {
+          branch.paths.forEach(path => {
+            path.periods.forEach(period => {
+              if (period.metrics && period.metrics[parameterId] !== undefined) {
+                metricData.push({
+                  date: period.startDate,
+                  value: period.metrics[parameterId] as number,
+                  scenario: `${scenario.title}: ${path.name}`,
+                });
+              }
+            });
+          });
+        });
+      }
+    });
+
+    return { chartData, metricData, paths };
   };
 
-  const { chartData, paths } = getComparisonData();
+  const { chartData, metricData, paths } = getComparisonData();
 
   return (
     <div className="parameter-comparison-view">
@@ -98,7 +136,7 @@ export default function ParameterComparisonView() {
 
           <div className="comparison-chart">
             <ResponsiveContainer width="100%" height={500}>
-              <LineChart
+              <ComposedChart
                 data={chartData}
                 margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
               >
@@ -125,6 +163,9 @@ export default function ParameterComparisonView() {
                     borderRadius: '8px',
                   }}
                   formatter={(value: number, name: string) => {
+                    if (name === 'metricPoints') {
+                      return [`${value} ${selectedParameter.unit}`, 'Period Metric'];
+                    }
                     const path = paths.find(p => p.pathId === name);
                     return [
                       `${value} ${selectedParameter.unit}`,
@@ -134,6 +175,7 @@ export default function ParameterComparisonView() {
                 />
                 <Legend
                   formatter={(value: string) => {
+                    if (value === 'metricPoints') return 'Period Metrics';
                     const path = paths.find(p => p.pathId === value);
                     return path?.pathName || value;
                   }}
@@ -151,7 +193,16 @@ export default function ParameterComparisonView() {
                     connectNulls
                   />
                 ))}
-              </LineChart>
+                {metricData.length > 0 && (
+                  <Scatter
+                    data={metricData}
+                    name="metricPoints"
+                    fill="#f59e0b"
+                    shape="diamond"
+                    legendType="diamond"
+                  />
+                )}
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
 
@@ -164,6 +215,13 @@ export default function ParameterComparisonView() {
                 </li>
               ))}
             </ul>
+            {metricData.length > 0 && (
+              <div className="metric-info">
+                <p style={{ marginTop: '1rem', color: '#f59e0b' }}>
+                  <strong>◆ Period Metrics ({metricData.length} points)</strong>: Discrete snapshots from timeline periods
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
