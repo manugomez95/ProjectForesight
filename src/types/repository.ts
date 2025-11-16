@@ -73,12 +73,14 @@ export interface MetricDefinition extends RepositoryItemMetadata {
   };
 }
 
+import type { AssumptionCategory } from '../config/categories';
+
 /**
  * Assumption definition in the centralized repository
  */
 export interface AssumptionDefinition extends RepositoryItemMetadata {
   /** Category for grouping assumptions */
-  category: 'technical' | 'alignment' | 'safety' | 'economic' | 'geopolitical' | 'regulatory' | 'strategic';
+  category: AssumptionCategory;
   /** Default confidence level */
   defaultConfidence: 'low' | 'medium' | 'high' | 'critical';
   /** Default impact if wrong */

@@ -938,6 +938,18 @@
   border: 1px solid #111111;
 }
 
+/*
+ * Assumption Category Badges
+ *
+ * IMPORTANT: When adding a new assumption category, you must:
+ * 1. Add it to src/config/categories.ts (single source of truth)
+ * 2. Add CSS for .badge.{category} here
+ * 3. Add CSS for .category-filter .tag.active.{category} below
+ *
+ * The centralized config defines all valid categories and their colors.
+ * Run the app in dev mode to see validation warnings if CSS is missing.
+ */
+
 .badge.technical {
   background: rgba(59, 130, 246, 0.2);
   color: #60a5fa;
@@ -972,6 +984,12 @@
   background: rgba(6, 182, 212, 0.2);
   color: #22d3ee;
   border: 1px solid rgba(6, 182, 212, 0.4);
+}
+
+.badge.security {
+  background: rgba(249, 115, 22, 0.2);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.4);
 }
 
 .badge.regulatory {
@@ -1044,6 +1062,12 @@
   background: rgba(6, 182, 212, 0.2);
   color: #22d3ee;
   border-color: rgba(6, 182, 212, 0.6);
+}
+
+.category-filter .tag.active.security {
+  background: rgba(249, 115, 22, 0.2);
+  color: #fb923c;
+  border-color: rgba(249, 115, 22, 0.6);
 }
 
 .category-filter .tag.active.economic {
