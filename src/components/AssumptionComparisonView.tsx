@@ -6,6 +6,8 @@
 import { useMemo, useEffect, useRef, useState } from 'react';
 import type { FlexibleScenario } from '../types/scenario';
 import { getAllAssumptions } from '../utils/resolveAssumptions';
+import { ALL_CATEGORIES, ASSUMPTION_CATEGORIES, validateCategory } from '../config/categories';
+import { runCategoryValidation } from '../utils/validateCategories';
 
 interface AssumptionComparisonViewProps {
   scenarios: FlexibleScenario[];
@@ -24,10 +26,10 @@ interface AssumptionUsage {
 export default function AssumptionComparisonView({ scenarios, focusedAssumptionId }: AssumptionComparisonViewProps) {
   const assumptionRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const categories = ['technical', 'alignment', 'safety', 'economic', 'geopolitical', 'regulatory', 'strategic'];
 
   const assumptionUsage = useMemo(() => {
     const usageMap = new Map<string, AssumptionUsage>();
+    const invalidCategories = new Set<string>();
 
     // Collect all assumptions from all scenarios
     scenarios.forEach((scenario) => {
@@ -37,6 +39,11 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
       );
 
       assumptions.forEach((assumption) => {
+        // Validate category
+        if (!validateCategory(assumption.category)) {
+          invalidCategories.add(assumption.category);
+        }
+
         if (!usageMap.has(assumption.id)) {
           usageMap.set(assumption.id, {
             assumptionId: assumption.id,
@@ -56,13 +63,24 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
       });
     });
 
+    // Warn about invalid categories in development
+    if (invalidCategories.size > 0) {
+      console.warn(
+        '⚠️ Invalid assumption categories detected:',
+        Array.from(invalidCategories),
+        '\nValid categories are:',
+        ALL_CATEGORIES,
+        '\nPlease update these assumptions to use valid categories or add the new categories to src/config/categories.ts'
+      );
+    }
+
     // Convert to array and sort by usage count (descending)
     return Array.from(usageMap.values()).sort((a, b) => b.count - a.count);
   }, [scenarios]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    categories.forEach((c) => {
+    ALL_CATEGORIES.forEach((c) => {
       counts[c] = assumptionUsage.filter((a) => a.category === c).length;
     });
     return counts;
@@ -90,6 +108,13 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
     }
   }, [focusedAssumptionId]);
 
+  // Validate category configuration in development
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      runCategoryValidation();
+    }
+  }, []); // Run once on mount
+
   return (
     <div className="assumption-comparison-view">
       <div className="comparison-header">
@@ -106,15 +131,15 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
         >
           All <span className="count">{assumptionUsage.length}</span>
         </button>
-        {categories.map((category) => (
+        {ALL_CATEGORIES.map((category) => (
           <button
             key={category}
-            className={`tag ${selectedCategory === category ? 'active' : ''}`}
+            className={`tag ${category} ${selectedCategory === category ? 'active' : ''}`}
             onClick={() =>
               setSelectedCategory((prev) => (prev === category ? null : category))
             }
           >
-            {category.charAt(0).toUpperCase() + category.slice(1)}{' '}
+            {ASSUMPTION_CATEGORIES[category].label}{' '}
             <span className="count">{categoryCounts[category] || 0}</span>
           </button>
         ))}
