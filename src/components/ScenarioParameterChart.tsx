@@ -38,13 +38,15 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               <h4>{parameter.name}</h4>
               <p className="chart-description">{parameter.description}</p>
             </div>
-            <ScaleToggleButton
-              isLogScale={isLogScale}
-              onToggle={() => setIsLogScale(!isLogScale)}
-            />
           </div>
         </div>
 
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
+          <ScaleToggleButton
+            isLogScale={isLogScale}
+            onToggle={() => setIsLogScale(!isLogScale)}
+          />
+        </div>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -82,7 +84,7 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               name={parameter.name}
             />
           </LineChart>
-        </ResponsiveContainer>
+          </ResponsiveContainer>
       </div>
     );
   }
@@ -94,20 +96,22 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
   if (branchPaths.length === 0) {
     return (
       <div className="parameter-chart">
-        <div className="chart-header">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <div>
-              <h4>{parameter.name}</h4>
-              <p className="chart-description">{parameter.description}</p>
-            </div>
-            <ScaleToggleButton
-              isLogScale={isLogScale}
-              onToggle={() => setIsLogScale(!isLogScale)}
-            />
+      <div className="chart-header">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <h4>{parameter.name}</h4>
+            <p className="chart-description">{parameter.description}</p>
           </div>
         </div>
+      </div>
 
-        <ResponsiveContainer width="100%" height={300}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
+        <ScaleToggleButton
+          isLogScale={isLogScale}
+          onToggle={() => setIsLogScale(!isLogScale)}
+        />
+      </div>
+      <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
             <XAxis
@@ -157,13 +161,15 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             <h4>{parameter.name}</h4>
             <p className="chart-description">{parameter.description}</p>
           </div>
-          <ScaleToggleButton
-            isLogScale={isLogScale}
-            onToggle={() => setIsLogScale(!isLogScale)}
-          />
         </div>
       </div>
 
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
+        <ScaleToggleButton
+          isLogScale={isLogScale}
+          onToggle={() => setIsLogScale(!isLogScale)}
+        />
+      </div>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -225,7 +231,7 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             />
           ))}
         </LineChart>
-      </ResponsiveContainer>
+        </ResponsiveContainer>
 
       {branchDate && (
         <div className="branch-indicator" style={{

@@ -89,76 +89,75 @@ export default function ParameterComparisonView() {
         <div className="comparison-content">
           <div className="comparison-chart">
             <div className="chart-header">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
-                  <h3>{selectedParameter.name}</h3>
-                  <p className="parameter-description">
+                  <h4>{selectedParameter.name}</h4>
+                  <p className="chart-description">
                     {selectedParameter.description} • Unit: <strong>{selectedParameter.unit}</strong> •
                     Available in <strong>{selectedParameter.scenarioCount}</strong> scenario{selectedParameter.scenarioCount > 1 ? 's' : ''}
                   </p>
                 </div>
-                <ScaleToggleButton
-                  isLogScale={isLogScale}
-                  onToggle={() => setIsLogScale(!isLogScale)}
-                />
               </div>
             </div>
 
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
+              <ScaleToggleButton
+                isLogScale={isLogScale}
+                onToggle={() => setIsLogScale(!isLogScale)}
+              />
+            </div>
             <ResponsiveContainer width="100%" height={500}>
-              <LineChart
-                data={chartData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis
-                  dataKey="date"
-                  stroke="rgba(255,255,255,0.5)"
-                  style={{ fontSize: '12px' }}
-                  label={{ value: 'Date', position: 'insideBottom', offset: -10 }}
-                />
-                <YAxis
-                  stroke="rgba(255,255,255,0.5)"
-                  style={{ fontSize: '12px' }}
-                  label={{
-                    value: selectedParameter.unit,
-                    angle: -90,
-                    position: 'insideLeft',
-                  }}
-                  {...getYAxisProps(isLogScale)}
-                  tickFormatter={(value) => formatTickValue(value, isLogScale)}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.9)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '8px',
-                  }}
-                  formatter={(value: number, name: string) => {
-                    const path = paths.find(p => p.pathId === name);
-                    return [
-                      `${formatTooltipValue(value)} ${selectedParameter.unit}`,
-                      path?.pathName || name,
-                    ];
-                  }}
-                />
-                <Legend
-                  formatter={(value: string) => {
-                    const path = paths.find(p => p.pathId === value);
-                    return path?.pathName || value;
-                  }}
-                />
-                {paths.map((path) => (
-                  <Line
-                    key={path.pathId}
-                    type="monotone"
-                    dataKey={path.pathId}
-                    stroke={path.color}
-                    strokeWidth={2.5}
-                    dot={{ fill: path.color, r: 4 }}
-                    activeDot={{ r: 6 }}
-                    name={path.pathId}
-                    connectNulls
+                <LineChart
+                  data={chartData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis
+                    dataKey="date"
+                    stroke="rgba(255,255,255,0.5)"
+                    style={{ fontSize: '12px' }}
                   />
+                  <YAxis
+                    stroke="rgba(255,255,255,0.5)"
+                    style={{ fontSize: '12px' }}
+                    label={{
+                      value: selectedParameter.unit,
+                      angle: -90,
+                      position: 'insideLeft',
+                    }}
+                    {...getYAxisProps(isLogScale)}
+                    tickFormatter={(value) => formatTickValue(value, isLogScale)}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'rgba(0,0,0,0.9)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      borderRadius: '8px',
+                    }}
+                    formatter={(value: number, name: string) => {
+                      const path = paths.find(p => p.pathId === name);
+                      return [
+                        `${formatTooltipValue(value)} ${selectedParameter.unit}`,
+                        path?.pathName || name,
+                      ];
+                    }}
+                  />
+                <Legend formatter={(value: string) => {
+                  const path = paths.find(p => p.pathId === value);
+                  return path?.pathName || value;
+                }} />
+                  {paths.map((path) => (
+                    <Line
+                      key={path.pathId}
+                      type="monotone"
+                      dataKey={path.pathId}
+                      stroke={path.color}
+                      strokeWidth={2.5}
+                      dot={{ fill: path.color, r: 4 }}
+                      activeDot={{ r: 6 }}
+                      name={path.pathId}
+                      connectNulls
+                    />
                 ))}
               </LineChart>
             </ResponsiveContainer>

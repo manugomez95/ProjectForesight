@@ -40,6 +40,8 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
         <h2>AI {metric.replace('-', ' ')} Forecast</h2>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
         <ScaleToggleButton
           isLogScale={isLogScale}
           onToggle={() => setIsLogScale(!isLogScale)}
