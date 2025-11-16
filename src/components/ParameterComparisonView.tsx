@@ -25,6 +25,10 @@ type ComparisonData = {
 
 export default function ParameterComparisonView() {
   const allParameters = getAllParameters();
+
+  console.log('All Parameters:', allParameters.length);
+  console.log('First 3 parameters:', allParameters.slice(0, 3));
+
   const [selectedParameterName, setSelectedParameterName] = useState<string>(
     allParameters[0]?.name || ''
   );
@@ -92,6 +96,13 @@ export default function ParameterComparisonView() {
   };
 
   const { chartData, metricData, paths } = getComparisonData();
+
+  console.log('Selected Parameter:', selectedParameter?.name);
+  console.log('Chart Data rows:', chartData.length);
+  console.log('Paths:', paths.length);
+  console.log('Metric Data:', metricData.length);
+  if (chartData.length > 0) console.log('Sample chart data:', chartData[0]);
+  if (paths.length > 0) console.log('Sample path:', paths[0]);
 
   return (
     <div className="parameter-comparison-view">
