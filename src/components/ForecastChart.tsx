@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
 
@@ -26,6 +27,7 @@ const generateData = (_metric: string) => {
 
 const ForecastChart = ({ metric }: ForecastChartProps) => {
   const data = generateData(metric)
+  const [isLogScale, setIsLogScale] = useState(false)
 
   return (
     <motion.div
@@ -34,7 +36,26 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
     >
-      <h2>AI {metric.replace('-', ' ')} Forecast</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <h2>AI {metric.replace('-', ' ')} Forecast</h2>
+        <button
+          onClick={() => setIsLogScale(!isLogScale)}
+          style={{
+            padding: '6px 14px',
+            fontSize: '13px',
+            backgroundColor: isLogScale ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255,255,255,0.1)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '4px',
+            color: 'rgba(255,255,255,0.8)',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            whiteSpace: 'nowrap'
+          }}
+          title="Toggle between linear and logarithmic scale"
+        >
+          {isLogScale ? 'Log Scale' : 'Linear Scale'}
+        </button>
+      </div>
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart data={data}>
           <defs>
@@ -54,12 +75,24 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
           />
           <YAxis
             tick={{ fill: '#888' }}
+            scale={isLogScale ? 'log' : 'linear'}
+            domain={isLogScale ? ['auto', 'auto'] : undefined}
+            tickFormatter={(value) => {
+              if (isLogScale && value >= 1000) {
+                return value.toExponential(1);
+              }
+              return value.toLocaleString();
+            }}
           />
           <Tooltip
             contentStyle={{
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
               border: '1px solid #444',
               borderRadius: '8px'
+            }}
+            formatter={(value: number) => {
+              const formatted = value >= 1000 ? value.toExponential(2) : value.toLocaleString();
+              return formatted;
             }}
           />
           <Legend />
