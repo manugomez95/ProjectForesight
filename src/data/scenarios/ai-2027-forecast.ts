@@ -468,13 +468,13 @@ export const ai2027Forecast: AIScenario = {
     {
       id: 'compute-scale',
       name: 'Training Compute Scale',
-      description: 'Log10 of FLOP used for training runs',
-      unit: 'log10(FLOP)',
+      description: 'Scale of compute used for training runs',
+      unit: 'FLOP',
       color: '#f59e0b',
       data: [
-        { date: '2025-09', value: 27, confidence: 'high' },
-        { date: '2025-12', value: 27.5, confidence: 'medium' },
-        { date: '2026-06', value: 28, confidence: 'medium' }
+        { date: '2025-09', value: 1e27, confidence: 'high' },
+        { date: '2025-12', value: 3.16e27, confidence: 'medium' },
+        { date: '2026-06', value: 1e28, confidence: 'medium' }
       ]
     },
     {
