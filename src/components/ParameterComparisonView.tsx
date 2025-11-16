@@ -68,45 +68,42 @@ export default function ParameterComparisonView() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <div className="parameter-selector">
-            <label htmlFor="parameter-select">Select Parameter:</label>
-            <select
-              id="parameter-select"
-              value={selectedParameterName}
-              onChange={(e) => setSelectedParameterName(e.target.value)}
-              className="parameter-select"
-            >
-              {allParameters.map((param) => (
-                <option key={param.name} value={param.name}>
-                  {param.name} ({param.scenarioCount} scenario{param.scenarioCount > 1 ? 's' : ''})
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <ScaleToggleButton
-            isLogScale={isLogScale}
-            onToggle={() => setIsLogScale(!isLogScale)}
-          />
+        <div className="parameter-selector">
+          <label htmlFor="parameter-select">Select Parameter:</label>
+          <select
+            id="parameter-select"
+            value={selectedParameterName}
+            onChange={(e) => setSelectedParameterName(e.target.value)}
+            className="parameter-select"
+          >
+            {allParameters.map((param) => (
+              <option key={param.name} value={param.name}>
+                {param.name} ({param.scenarioCount} scenario{param.scenarioCount > 1 ? 's' : ''})
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
       {selectedParameter && (
         <div className="comparison-content">
-          <div className="parameter-info">
-            <h3>{selectedParameter.name}</h3>
-            <p className="parameter-description">{selectedParameter.description}</p>
-            <p className="parameter-unit">
-              Unit: <strong>{selectedParameter.unit}</strong>
-            </p>
-            <p className="scenario-count">
-              Available in <strong>{selectedParameter.scenarioCount}</strong> scenario
-              {selectedParameter.scenarioCount > 1 ? 's' : ''}
-            </p>
-          </div>
-
           <div className="comparison-chart">
+            <div className="chart-header">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <div>
+                  <h3>{selectedParameter.name}</h3>
+                  <p className="parameter-description">
+                    {selectedParameter.description} • Unit: <strong>{selectedParameter.unit}</strong> •
+                    Available in <strong>{selectedParameter.scenarioCount}</strong> scenario{selectedParameter.scenarioCount > 1 ? 's' : ''}
+                  </p>
+                </div>
+                <ScaleToggleButton
+                  isLogScale={isLogScale}
+                  onToggle={() => setIsLogScale(!isLogScale)}
+                />
+              </div>
+            </div>
+
             <ResponsiveContainer width="100%" height={500}>
               <LineChart
                 data={chartData}

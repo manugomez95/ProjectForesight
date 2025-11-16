@@ -157,23 +157,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             <h4>{parameter.name}</h4>
             <p className="chart-description">{parameter.description}</p>
           </div>
-          <button
-            onClick={() => setIsLogScale(!isLogScale)}
-            style={{
-              padding: '4px 12px',
-              fontSize: '12px',
-              backgroundColor: isLogScale ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255,255,255,0.1)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '4px',
-              color: 'rgba(255,255,255,0.8)',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              whiteSpace: 'nowrap'
-            }}
-            title="Toggle between linear and logarithmic scale"
-          >
-            {isLogScale ? 'Log Scale' : 'Linear Scale'}
-          </button>
+          <ScaleToggleButton
+            isLogScale={isLogScale}
+            onToggle={() => setIsLogScale(!isLogScale)}
+          />
         </div>
       </div>
 
@@ -189,14 +176,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             stroke="rgba(255,255,255,0.5)"
             style={{ fontSize: '12px' }}
             label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
-            scale={isLogScale ? 'log' : 'linear'}
-            domain={isLogScale ? ['auto', 'auto'] : undefined}
-            tickFormatter={(value) => {
-              if (isLogScale && value >= 1000) {
-                return value.toExponential(1);
-              }
-              return value.toLocaleString();
-            }}
+            {...getYAxisProps(isLogScale)}
+            tickFormatter={(value) => formatTickValue(value, isLogScale)}
           />
           <Tooltip
             contentStyle={{
