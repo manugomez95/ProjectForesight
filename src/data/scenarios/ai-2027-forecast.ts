@@ -478,7 +478,7 @@ export const ai2027Forecast: AIScenario = {
       ]
     },
     {
-      id: 'agent-copies',
+      id: 'ai-agent-copies',
       name: 'Parallel AI Agent Copies',
       description: 'Number of AI agents running in parallel for research and development',
       unit: 'copies',
@@ -517,7 +517,7 @@ export const ai2027Forecast: AIScenario = {
       ]
     },
     {
-      id: 'public-awareness',
+      id: 'public-awareness-ai-risk',
       name: 'Public Awareness of AI Risk',
       description: 'Percentage of public aware of and concerned about AI risks',
       unit: '% aware',
@@ -530,7 +530,7 @@ export const ai2027Forecast: AIScenario = {
       ]
     },
     {
-      id: 'economic-impact',
+      id: 'global-ai-capex',
       name: 'Global AI Capex',
       description: 'Annual global capital expenditure on AI infrastructure',
       unit: '$ billions',

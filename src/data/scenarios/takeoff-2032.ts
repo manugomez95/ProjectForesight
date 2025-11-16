@@ -290,7 +290,7 @@ export const takeoff2032: AIScenario = {
 
   parameters: [
     {
-      id: 'ai-revenue-gdp',
+      id: 'ai-revenue-gdp-share',
       name: 'AI Revenue as % of GDP',
       description: 'Direct AI company revenues as percentage of world GDP',
       unit: '% of GDP',
@@ -302,7 +302,7 @@ export const takeoff2032: AIScenario = {
       color: '#8b5cf6'
     },
     {
-      id: 'unemployment',
+      id: 'us-unemployment-rate',
       name: 'US Unemployment Rate',
       description: 'Unemployment rate in the United States',
       unit: 'percentage',
@@ -314,7 +314,7 @@ export const takeoff2032: AIScenario = {
       color: '#ef4444'
     },
     {
-      id: 'automation-level',
+      id: 'economic-automation-level',
       name: 'Economic Automation Level',
       description: 'Percentage of 2024-economy tasks now done by AI',
       unit: 'percentage',
@@ -325,7 +325,7 @@ export const takeoff2032: AIScenario = {
       color: '#3b82f6'
     },
     {
-      id: 'china-robots',
+      id: 'china-robot-count',
       name: 'China Robot Count',
       description: 'Total number of robots in China (all types)',
       unit: 'millions',
@@ -336,7 +336,7 @@ export const takeoff2032: AIScenario = {
       color: '#f59e0b'
     },
     {
-      id: 'us-robots',
+      id: 'us-robot-count',
       name: 'US Robot Count',
       description: 'Total number of robots in United States (all types)',
       unit: 'millions',
