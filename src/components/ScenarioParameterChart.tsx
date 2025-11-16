@@ -12,6 +12,8 @@ import {
 } from 'recharts';
 import type { ScenarioParameter, AIScenario } from '../types/scenario';
 import { createBranchingChartData } from '../utils/parameterUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 interface ScenarioParameterChartProps {
   parameter: ScenarioParameter;
@@ -36,23 +38,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               <h4>{parameter.name}</h4>
               <p className="chart-description">{parameter.description}</p>
             </div>
-            <button
-              onClick={() => setIsLogScale(!isLogScale)}
-              style={{
-                padding: '4px 12px',
-                fontSize: '12px',
-                backgroundColor: isLogScale ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '4px',
-                color: 'rgba(255,255,255,0.8)',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                whiteSpace: 'nowrap'
-              }}
-              title="Toggle between linear and logarithmic scale"
-            >
-              {isLogScale ? 'Log Scale' : 'Linear Scale'}
-            </button>
+            <ScaleToggleButton
+              isLogScale={isLogScale}
+              onToggle={() => setIsLogScale(!isLogScale)}
+            />
           </div>
         </div>
 
@@ -68,14 +57,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               stroke="rgba(255,255,255,0.5)"
               style={{ fontSize: '12px' }}
               label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
-              scale={isLogScale ? 'log' : 'linear'}
-              domain={isLogScale ? ['auto', 'auto'] : undefined}
-              tickFormatter={(value) => {
-                if (isLogScale && value >= 1000) {
-                  return value.toExponential(1);
-                }
-                return value.toLocaleString();
-              }}
+              {...getYAxisProps(isLogScale)}
+              tickFormatter={(value) => formatTickValue(value, isLogScale)}
             />
             <Tooltip
               contentStyle={{
@@ -83,10 +66,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '8px',
               }}
-              formatter={(value: number) => {
-                const formatted = value >= 1000 ? value.toExponential(2) : value.toLocaleString();
-                return [`${formatted} ${parameter.unit}`, parameter.name];
-              }}
+              formatter={(value: number) => [
+                `${formatTooltipValue(value)} ${parameter.unit}`,
+                parameter.name
+              ]}
             />
             <Legend />
             <Line
@@ -117,23 +100,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               <h4>{parameter.name}</h4>
               <p className="chart-description">{parameter.description}</p>
             </div>
-            <button
-              onClick={() => setIsLogScale(!isLogScale)}
-              style={{
-                padding: '4px 12px',
-                fontSize: '12px',
-                backgroundColor: isLogScale ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '4px',
-                color: 'rgba(255,255,255,0.8)',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                whiteSpace: 'nowrap'
-              }}
-              title="Toggle between linear and logarithmic scale"
-            >
-              {isLogScale ? 'Log Scale' : 'Linear Scale'}
-            </button>
+            <ScaleToggleButton
+              isLogScale={isLogScale}
+              onToggle={() => setIsLogScale(!isLogScale)}
+            />
           </div>
         </div>
 
@@ -149,14 +119,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               stroke="rgba(255,255,255,0.5)"
               style={{ fontSize: '12px' }}
               label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
-              scale={isLogScale ? 'log' : 'linear'}
-              domain={isLogScale ? ['auto', 'auto'] : undefined}
-              tickFormatter={(value) => {
-                if (isLogScale && value >= 1000) {
-                  return value.toExponential(1);
-                }
-                return value.toLocaleString();
-              }}
+              {...getYAxisProps(isLogScale)}
+              tickFormatter={(value) => formatTickValue(value, isLogScale)}
             />
             <Tooltip
               contentStyle={{
@@ -164,10 +128,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '8px',
               }}
-              formatter={(value: number) => {
-                const formatted = value >= 1000 ? value.toExponential(2) : value.toLocaleString();
-                return [`${formatted} ${parameter.unit}`, parameter.name];
-              }}
+              formatter={(value: number) => [
+                `${formatTooltipValue(value)} ${parameter.unit}`,
+                parameter.name
+              ]}
             />
             <Legend />
             <Line
@@ -242,8 +206,7 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             }}
             formatter={(value: number, name: string) => {
               const pathName = branchPaths.find(p => p.id === name)?.name || parameter.name;
-              const formatted = value >= 1000 ? value.toExponential(2) : value.toLocaleString();
-              return [`${formatted} ${parameter.unit}`, pathName];
+              return [`${formatTooltipValue(value)} ${parameter.unit}`, pathName];
             }}
           />
           <Legend

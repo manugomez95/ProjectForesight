@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 interface ForecastChartProps {
   metric: string
@@ -38,23 +40,10 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
         <h2>AI {metric.replace('-', ' ')} Forecast</h2>
-        <button
-          onClick={() => setIsLogScale(!isLogScale)}
-          style={{
-            padding: '6px 14px',
-            fontSize: '13px',
-            backgroundColor: isLogScale ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255,255,255,0.1)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '4px',
-            color: 'rgba(255,255,255,0.8)',
-            cursor: 'pointer',
-            transition: 'all 0.2s',
-            whiteSpace: 'nowrap'
-          }}
-          title="Toggle between linear and logarithmic scale"
-        >
-          {isLogScale ? 'Log Scale' : 'Linear Scale'}
-        </button>
+        <ScaleToggleButton
+          isLogScale={isLogScale}
+          onToggle={() => setIsLogScale(!isLogScale)}
+        />
       </div>
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart data={data}>
@@ -75,14 +64,8 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
           />
           <YAxis
             tick={{ fill: '#888' }}
-            scale={isLogScale ? 'log' : 'linear'}
-            domain={isLogScale ? ['auto', 'auto'] : undefined}
-            tickFormatter={(value) => {
-              if (isLogScale && value >= 1000) {
-                return value.toExponential(1);
-              }
-              return value.toLocaleString();
-            }}
+            {...getYAxisProps(isLogScale)}
+            tickFormatter={(value) => formatTickValue(value, isLogScale)}
           />
           <Tooltip
             contentStyle={{
@@ -90,10 +73,7 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
               border: '1px solid #444',
               borderRadius: '8px'
             }}
-            formatter={(value: number) => {
-              const formatted = value >= 1000 ? value.toExponential(2) : value.toLocaleString();
-              return formatted;
-            }}
+            formatter={(value: number) => formatTooltipValue(value)}
           />
           <Legend />
           <Area

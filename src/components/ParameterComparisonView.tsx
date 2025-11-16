@@ -11,6 +11,8 @@ import {
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
 import { expandParameterWithBranching, mergeExpandedParameters } from '../utils/parameterUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 type ComparisonData = {
   chartData: Array<{ date: string; [key: string]: string | number }>;
@@ -26,6 +28,7 @@ export default function ParameterComparisonView() {
   const [selectedParameterName, setSelectedParameterName] = useState<string>(
     allParameters[0]?.name || ''
   );
+  const [isLogScale, setIsLogScale] = useState(false);
 
   const selectedParameter = allParameters.find(p => p.name === selectedParameterName);
 
@@ -65,20 +68,27 @@ export default function ParameterComparisonView() {
           </p>
         </div>
 
-        <div className="parameter-selector">
-          <label htmlFor="parameter-select">Select Parameter:</label>
-          <select
-            id="parameter-select"
-            value={selectedParameterName}
-            onChange={(e) => setSelectedParameterName(e.target.value)}
-            className="parameter-select"
-          >
-            {allParameters.map((param) => (
-              <option key={param.name} value={param.name}>
-                {param.name} ({param.scenarioCount} scenario{param.scenarioCount > 1 ? 's' : ''})
-              </option>
-            ))}
-          </select>
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div className="parameter-selector">
+            <label htmlFor="parameter-select">Select Parameter:</label>
+            <select
+              id="parameter-select"
+              value={selectedParameterName}
+              onChange={(e) => setSelectedParameterName(e.target.value)}
+              className="parameter-select"
+            >
+              {allParameters.map((param) => (
+                <option key={param.name} value={param.name}>
+                  {param.name} ({param.scenarioCount} scenario{param.scenarioCount > 1 ? 's' : ''})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <ScaleToggleButton
+            isLogScale={isLogScale}
+            onToggle={() => setIsLogScale(!isLogScale)}
+          />
         </div>
       </div>
 
@@ -117,6 +127,8 @@ export default function ParameterComparisonView() {
                     angle: -90,
                     position: 'insideLeft',
                   }}
+                  {...getYAxisProps(isLogScale)}
+                  tickFormatter={(value) => formatTickValue(value, isLogScale)}
                 />
                 <Tooltip
                   contentStyle={{
@@ -127,7 +139,7 @@ export default function ParameterComparisonView() {
                   formatter={(value: number, name: string) => {
                     const path = paths.find(p => p.pathId === name);
                     return [
-                      `${value} ${selectedParameter.unit}`,
+                      `${formatTooltipValue(value)} ${selectedParameter.unit}`,
                       path?.pathName || name,
                     ];
                   }}
