@@ -27,6 +27,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['AI Speed vs Human Expert', 'AI R&D Progress Multiplier'],
     range: { min: 1, max: 1000 },
     usesConfidence: true,
+    currentValue: '5x',
   },
   {
     id: 'training-compute-scale',
@@ -38,6 +39,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['capability', 'compute', 'training'],
     range: { min: 1e20, max: 1e30 },
     usesConfidence: true,
+    currentValue: '1e26 FLOP',
   },
   {
     id: 'ai-agent-copies',
@@ -50,6 +52,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['Agent Instances'],
     range: { min: 1, max: 1e9 },
     usesConfidence: true,
+    currentValue: '~1 million',
   },
   {
     id: 'ai-operational-independence',
@@ -61,6 +64,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['capability', 'autonomy', 'independence'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '25%',
   },
 
   // ============================================================================
@@ -78,6 +82,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['Perceived vs Actual Alignment', 'AI Alignment Level'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '60%',
   },
   {
     id: 'alignment-verification-confidence',
@@ -89,6 +94,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['safety', 'alignment', 'verification'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '40%',
   },
   {
     id: 'public-awareness-ai-risk',
@@ -102,6 +108,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['Public Awareness of Risk', 'AI Risk Awareness'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '35%',
   },
 
   // ============================================================================
@@ -118,6 +125,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['AI Capex', 'Global AI Investment'],
     range: { min: 0, max: 10000 },
     usesConfidence: true,
+    currentValue: '$250B',
   },
   {
     id: 'ai-revenue-gdp-share',
@@ -129,6 +137,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['economic', 'gdp', 'revenue'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '4.5%',
   },
   {
     id: 'knowledge-worker-automation',
@@ -141,6 +150,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['Cognitive Task Automation'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '20%',
   },
   {
     id: 'us-unemployment-rate',
@@ -152,6 +162,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['economic', 'unemployment', 'labor', 'us'],
     range: { min: 0, max: 50 },
     usesConfidence: true,
+    currentValue: '4.1%',
   },
   {
     id: 'economic-automation-level',
@@ -163,6 +174,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['economic', 'automation', 'productivity'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '30%',
   },
 
   // ============================================================================
@@ -179,6 +191,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['AI Race Tension', 'Global Competition'],
     range: { min: 0, max: 100 },
     usesConfidence: true,
+    currentValue: '70',
   },
 
   // ============================================================================
@@ -194,6 +207,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['deployment', 'robots', 'us'],
     range: { min: 0, max: 1000 },
     usesConfidence: true,
+    currentValue: '15M',
   },
   {
     id: 'china-robot-count',
@@ -205,6 +219,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['deployment', 'robots', 'china'],
     range: { min: 0, max: 1000 },
     usesConfidence: true,
+    currentValue: '25M',
   },
 
   // ============================================================================
@@ -220,6 +235,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     tags: ['catastrophic', 'population', 'survival'],
     range: { min: 0, max: 100 },
     usesConfidence: false,
+    currentValue: '100%',
   },
   {
     id: 'infrastructure-control',
@@ -232,6 +248,7 @@ export const PARAMETER_REPOSITORY: ParameterDefinition[] = [
     aliases: ['U3 Infrastructure Control'],
     range: { min: 0, max: 100 },
     usesConfidence: false,
+    currentValue: '15%',
   },
 ];
 

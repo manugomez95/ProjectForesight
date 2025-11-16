@@ -725,6 +725,64 @@
   opacity: 0.8;
 }
 
+/* Tooltip Styles */
+.has-tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: #1e293b;
+  border: 2px solid #8b5cf6;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-width: 200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.has-tooltip:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-12px);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #8b5cf6;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.tooltip-row strong {
+  color: #a78bfa;
+  font-size: 0.85rem;
+}
+
+.tooltip-row span {
+  color: #e2e8f0;
+  font-size: 0.85rem;
+}
+
 /* Branching View Styles */
 .branching-view {
   margin-top: 2rem;

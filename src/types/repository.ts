@@ -44,6 +44,8 @@ export interface ParameterDefinition extends RepositoryItemMetadata {
   };
   /** Whether this parameter typically uses confidence intervals */
   usesConfidence?: boolean;
+  /** Current value of this parameter (for hover tooltips) */
+  currentValue?: number | string;
 }
 
 /**
@@ -56,6 +58,8 @@ export interface MilestoneDefinition extends RepositoryItemMetadata {
   defaultSignificance?: 'low' | 'medium' | 'high' | 'critical';
   /** Related parameters that typically change with this milestone */
   relatedParameters?: string[];
+  /** Current status of this milestone (for hover tooltips) */
+  currentStatus?: 'achieved' | 'not-achieved' | 'in-progress' | 'unknown';
 }
 
 /**

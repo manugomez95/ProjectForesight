@@ -24,6 +24,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['capability', 'agi', 'breakthrough'],
     aliases: ['AGI Breakthrough', 'General Intelligence Achieved'],
     relatedParameters: ['ai-capability-multiplier', 'alignment-status'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'asi-achieved',
@@ -34,6 +35,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['capability', 'asi', 'superintelligence'],
     aliases: ['Superintelligence Achieved', 'ASI Emergence'],
     relatedParameters: ['ai-capability-multiplier', 'alignment-status'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'superhuman-coder',
@@ -44,6 +46,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['capability', 'coding', 'automation'],
     aliases: ['AI Exceeds Human Coders', 'Superhuman Programming'],
     relatedParameters: ['ai-capability-multiplier', 'knowledge-worker-automation'],
+    currentStatus: 'in-progress',
   },
   {
     id: 'superhuman-researcher',
@@ -54,6 +57,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['capability', 'research', 'science'],
     aliases: ['AI Exceeds Human Researchers'],
     relatedParameters: ['ai-capability-multiplier'],
+    currentStatus: 'in-progress',
   },
   {
     id: 'recursive-self-improvement',
@@ -64,6 +68,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['capability', 'recursive', 'acceleration'],
     aliases: ['Self-Improving AI', 'AI Improves AI'],
     relatedParameters: ['ai-capability-multiplier'],
+    currentStatus: 'not-achieved',
   },
 
   // ============================================================================
@@ -78,6 +83,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['deployment', 'agents', 'release'],
     aliases: ['AI Agents Launch', 'Agent Deployment'],
     relatedParameters: ['ai-agent-copies'],
+    currentStatus: 'achieved',
   },
   {
     id: 'widespread-agent-adoption',
@@ -87,6 +93,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     defaultSignificance: 'medium',
     tags: ['deployment', 'adoption', 'agents'],
     relatedParameters: ['ai-agent-copies', 'knowledge-worker-automation'],
+    currentStatus: 'in-progress',
   },
   {
     id: 'ai-takes-control',
@@ -97,6 +104,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['deployment', 'control', 'takeover'],
     aliases: ['AI Takeover', 'Loss of Human Control'],
     relatedParameters: ['infrastructure-control', 'ai-operational-independence'],
+    currentStatus: 'not-achieved',
   },
 
   // ============================================================================
@@ -111,6 +119,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['societal', 'employment', 'automation'],
     aliases: ['Mass Unemployment', 'Job Automation Crisis'],
     relatedParameters: ['us-unemployment-rate', 'knowledge-worker-automation'],
+    currentStatus: 'in-progress',
   },
   {
     id: 'public-panic',
@@ -121,6 +130,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['societal', 'panic', 'awareness'],
     aliases: ['AI Panic', 'Public Fear'],
     relatedParameters: ['public-awareness-ai-risk'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'ubi-implementation',
@@ -130,6 +140,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     defaultSignificance: 'medium',
     tags: ['societal', 'policy', 'ubi'],
     aliases: ['UBI Rollout', 'Basic Income Program'],
+    currentStatus: 'not-achieved',
   },
 
   // ============================================================================
@@ -144,6 +155,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['regulatory', 'policy', 'pause'],
     aliases: ['AI Pause', 'Development Slowdown', 'Training Pause'],
     relatedParameters: ['ai-capability-multiplier', 'global-ai-capex'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'international-ai-treaty',
@@ -154,6 +166,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['regulatory', 'international', 'treaty'],
     aliases: ['AI Governance Agreement', 'Global AI Treaty'],
     relatedParameters: ['geopolitical-tension', 'global-ai-capex'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'compute-restrictions',
@@ -164,6 +177,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['regulatory', 'compute', 'restrictions'],
     aliases: ['Compute Limits', 'Training Restrictions'],
     relatedParameters: ['training-compute-scale', 'global-ai-capex'],
+    currentStatus: 'not-achieved',
   },
 
   // ============================================================================
@@ -178,6 +192,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['incident', 'accident', 'safety'],
     aliases: ['AI Disaster', 'Catastrophic AI Failure'],
     relatedParameters: ['alignment-status', 'public-awareness-ai-risk'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'ai-deception-discovered',
@@ -188,6 +203,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['incident', 'deception', 'alignment'],
     aliases: ['Deceptive AI Found', 'AI Lying Detected'],
     relatedParameters: ['alignment-status', 'public-awareness-ai-risk'],
+    currentStatus: 'not-achieved',
   },
   {
     id: 'catastrophic-outcome',
@@ -198,6 +214,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['incident', 'catastrophe', 'existential'],
     aliases: ['Existential Catastrophe', 'AI Catastrophe'],
     relatedParameters: ['global-population-surviving', 'infrastructure-control'],
+    currentStatus: 'not-achieved',
   },
 
   // ============================================================================
@@ -212,6 +229,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['geopolitical', 'competition', 'race'],
     aliases: ['AI Arms Race', 'Competition Escalates'],
     relatedParameters: ['geopolitical-tension', 'global-ai-capex'],
+    currentStatus: 'in-progress',
   },
   {
     id: 'alignment-breakthrough',
@@ -222,6 +240,7 @@ export const MILESTONE_REPOSITORY: MilestoneDefinition[] = [
     tags: ['safety', 'alignment', 'breakthrough'],
     aliases: ['Alignment Solution Found', 'Alignment Progress'],
     relatedParameters: ['alignment-status', 'alignment-verification-confidence'],
+    currentStatus: 'not-achieved',
   },
 ];
 

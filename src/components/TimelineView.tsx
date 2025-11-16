@@ -1,5 +1,7 @@
 import type { TimelinePeriod, Milestone } from '../types/scenario';
 import { useState } from 'react';
+import { getMilestoneDefinition } from '../data/repository/milestones';
+import { getParameterDefinition } from '../data/repository/parameters';
 
 interface TimelineViewProps {
   periods: TimelinePeriod[];
@@ -18,6 +20,20 @@ export default function TimelineView({ periods, milestones, branchName }: Timeli
       newExpanded.add(periodId);
     }
     setExpandedPeriods(newExpanded);
+  };
+
+  const formatStatus = (status?: string): string => {
+    if (!status) return 'Unknown';
+    return status.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
+
+  const getStatusEmoji = (status?: string): string => {
+    switch (status) {
+      case 'achieved': return '✅';
+      case 'in-progress': return '🔄';
+      case 'not-achieved': return '⏸️';
+      default: return '❓';
+    }
   };
 
   return (
@@ -75,12 +91,25 @@ export default function TimelineView({ periods, milestones, branchName }: Timeli
                       <div className="period-metrics">
                         <h5>Metrics:</h5>
                         <div className="metrics-grid">
-                          {Object.entries(period.metrics).map(([key, value]) => (
-                            <div key={key} className="metric-item">
-                              <span className="metric-key">{key}:</span>
-                              <span className="metric-value">{value}</span>
-                            </div>
-                          ))}
+                          {Object.entries(period.metrics).map(([key, value]) => {
+                            const parameterDefinition = getParameterDefinition(key);
+                            const currentValue = parameterDefinition?.currentValue;
+
+                            return (
+                              <div key={key} className="metric-item has-tooltip">
+                                <span className="metric-key">{parameterDefinition?.name || key}:</span>
+                                <span className="metric-value">{value}</span>
+                                {currentValue && (
+                                  <div className="tooltip">
+                                    <div className="tooltip-row">
+                                      <strong>Current Value:</strong>
+                                      <span>{currentValue}</span>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     )}
@@ -88,15 +117,26 @@ export default function TimelineView({ periods, milestones, branchName }: Timeli
                     {periodMilestones.length > 0 && (
                       <div className="period-milestones">
                         <h5>Milestones:</h5>
-                        {periodMilestones.map((milestone) => (
-                          <div
-                            key={milestone.id}
-                            className={`milestone-badge ${milestone.significance}`}
-                          >
-                            <span className="milestone-title">{milestone.title}</span>
-                            <span className="milestone-date">{milestone.date}</span>
-                          </div>
-                        ))}
+                        {periodMilestones.map((milestone) => {
+                          const milestoneDefinition = getMilestoneDefinition(milestone.id);
+                          const currentStatus = milestoneDefinition?.currentStatus;
+
+                          return (
+                            <div
+                              key={milestone.id}
+                              className={`milestone-badge ${milestone.significance} has-tooltip`}
+                            >
+                              <span className="milestone-title">{milestone.title}</span>
+                              <span className="milestone-date">{milestone.date}</span>
+                              <div className="tooltip">
+                                <div className="tooltip-row">
+                                  <strong>Current Status:</strong>
+                                  <span>{getStatusEmoji(currentStatus)} {formatStatus(currentStatus)}</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
