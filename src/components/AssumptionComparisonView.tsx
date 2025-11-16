@@ -109,7 +109,7 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
         {categories.map((category) => (
           <button
             key={category}
-            className={`tag ${selectedCategory === category ? 'active' : ''}`}
+            className={`tag ${category} ${selectedCategory === category ? 'active' : ''}`}
             onClick={() =>
               setSelectedCategory((prev) => (prev === category ? null : category))
             }
