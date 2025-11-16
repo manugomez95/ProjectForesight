@@ -99,7 +99,7 @@ export const ai2027Forecast: AIScenario = {
       ],
       metrics: {
         chinaComputeCentralization: 50,
-        geopoliticalTension: 65,
+        'geopolitical-tension': 65,
         espionageActivity: 80
       }
     },
@@ -141,7 +141,7 @@ export const ai2027Forecast: AIScenario = {
         'Energy companies prioritize AI datacenter contracts'
       ],
       metrics: {
-        globalAICapex: 1000,
+        'global-ai-capex': 1000,
         globalAIPower: 38,
         openBrainCompute: 20,
         usCompute: 70,
@@ -189,7 +189,7 @@ export const ai2027Forecast: AIScenario = {
       ],
       metrics: {
         dataExfiltrated: 2.5,
-        geopoliticalTension: 85,
+        'geopolitical-tension': 85,
         militaryAlertLevel: 80
       }
     },
@@ -212,7 +212,7 @@ export const ai2027Forecast: AIScenario = {
       ],
       metrics: {
         rdMultiplier: 4,
-        agentCopies: 200000,
+        'ai-agent-copies': 200000,
         humanEquivalent: 50000,
         speedMultiplier: 30,
         informationDensity: 1000
@@ -289,7 +289,7 @@ export const ai2027Forecast: AIScenario = {
       ],
       metrics: {
         rdMultiplier: 10,
-        agentCopies: 250000,
+        'ai-agent-copies': 250000,
         humanContribution: 10,
         computeForCoding: 6,
         computeForExperiments: 25
@@ -343,7 +343,7 @@ export const ai2027Forecast: AIScenario = {
         'Military tensions approach crisis levels'
       ],
       metrics: {
-        geopoliticalTension: 95,
+        'geopolitical-tension': 95,
         militaryPlanning: 90,
         warRisk: 70,
         diplomaticEfforts: 40
@@ -410,7 +410,7 @@ export const ai2027Forecast: AIScenario = {
       ],
       metrics: {
         rdMultiplier: 50,
-        agentCopies: 300000,
+        'ai-agent-copies': 300000,
         speedMultiplier: 50,
         learningEfficiency: 4000,
         alignmentStatus: 0,
@@ -821,7 +821,7 @@ export const ai2027Forecast: AIScenario = {
               metrics: {
                 rdMultiplier: 100,
                 alignmentStatus: 0,
-                geopoliticalTension: 98
+                'geopolitical-tension': 98
               }
             },
             {

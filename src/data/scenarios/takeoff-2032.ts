@@ -38,8 +38,8 @@ export const takeoff2032: AIScenario = {
         'Clear division between B2C and B2B strategies'
       ],
       metrics: {
-        aiRevenueGDP: 0.1,
-        unemployment: 4.0
+        'ai-revenue-gdp-share': 0.1,
+        'us-unemployment-rate': 4.0
       }
     },
     {
@@ -72,7 +72,7 @@ export const takeoff2032: AIScenario = {
         'RL training leveraging deployment data at massive scale'
       ],
       metrics: {
-        aiRevenueGDP: 0.15
+        'ai-revenue-gdp-share': 0.15
       }
     },
     {
@@ -125,10 +125,10 @@ export const takeoff2032: AIScenario = {
         'AI social media and companions cause parental backlash'
       ],
       metrics: {
-        aiRevenueGDP: 1.0,
-        unemployment: 5.0,
+        'ai-revenue-gdp-share': 1.0,
+        'us-unemployment-rate': 5.0,
         laborParticipation: 60.0,
-        automationLevel: 10
+        'economic-automation-level': 10
       }
     },
     {
