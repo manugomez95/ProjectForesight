@@ -93,11 +93,6 @@ export default function ParameterComparisonView() {
 
   const { chartData, metricData, paths } = getComparisonData();
 
-  // Debug logging
-  console.log('Selected Parameter:', selectedParameter?.name);
-  console.log('Metric Data Points:', metricData.length);
-  console.log('Metric Data:', metricData);
-
   return (
     <div className="parameter-comparison-view">
       <div className="comparison-header">
