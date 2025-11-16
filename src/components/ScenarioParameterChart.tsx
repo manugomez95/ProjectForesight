@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   LineChart,
   Line,
@@ -11,6 +12,8 @@ import {
 } from 'recharts';
 import type { ScenarioParameter, AIScenario } from '../types/scenario';
 import { createBranchingChartData } from '../utils/parameterUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 interface ScenarioParameterChartProps {
   parameter: ScenarioParameter;
@@ -18,6 +21,7 @@ interface ScenarioParameterChartProps {
 }
 
 export default function ScenarioParameterChart({ parameter, scenario }: ScenarioParameterChartProps) {
+  const [isLogScale, setIsLogScale] = useState(false);
   if (!scenario) {
     // No scenario provided, render simple chart
     const chartData = parameter.data.map((point) => ({
@@ -29,8 +33,16 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
     return (
       <div className="parameter-chart">
         <div className="chart-header">
-          <h4>{parameter.name}</h4>
-          <p className="chart-description">{parameter.description}</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <h4>{parameter.name}</h4>
+              <p className="chart-description">{parameter.description}</p>
+            </div>
+            <ScaleToggleButton
+              isLogScale={isLogScale}
+              onToggle={() => setIsLogScale(!isLogScale)}
+            />
+          </div>
         </div>
 
         <ResponsiveContainer width="100%" height={300}>
@@ -45,6 +57,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               stroke="rgba(255,255,255,0.5)"
               style={{ fontSize: '12px' }}
               label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
+              {...getYAxisProps(isLogScale)}
+              tickFormatter={(value) => formatTickValue(value, isLogScale)}
             />
             <Tooltip
               contentStyle={{
@@ -52,7 +66,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '8px',
               }}
-              formatter={(value: number) => [`${value} ${parameter.unit}`, parameter.name]}
+              formatter={(value: number) => [
+                `${formatTooltipValue(value)} ${parameter.unit}`,
+                parameter.name
+              ]}
             />
             <Legend />
             <Line
@@ -78,8 +95,16 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
     return (
       <div className="parameter-chart">
         <div className="chart-header">
-          <h4>{parameter.name}</h4>
-          <p className="chart-description">{parameter.description}</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <h4>{parameter.name}</h4>
+              <p className="chart-description">{parameter.description}</p>
+            </div>
+            <ScaleToggleButton
+              isLogScale={isLogScale}
+              onToggle={() => setIsLogScale(!isLogScale)}
+            />
+          </div>
         </div>
 
         <ResponsiveContainer width="100%" height={300}>
@@ -94,6 +119,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
               stroke="rgba(255,255,255,0.5)"
               style={{ fontSize: '12px' }}
               label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
+              {...getYAxisProps(isLogScale)}
+              tickFormatter={(value) => formatTickValue(value, isLogScale)}
             />
             <Tooltip
               contentStyle={{
@@ -101,7 +128,10 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '8px',
               }}
-              formatter={(value: number) => [`${value} ${parameter.unit}`, parameter.name]}
+              formatter={(value: number) => [
+                `${formatTooltipValue(value)} ${parameter.unit}`,
+                parameter.name
+              ]}
             />
             <Legend />
             <Line
@@ -122,8 +152,16 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
   return (
     <div className="parameter-chart">
       <div className="chart-header">
-        <h4>{parameter.name}</h4>
-        <p className="chart-description">{parameter.description}</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <h4>{parameter.name}</h4>
+            <p className="chart-description">{parameter.description}</p>
+          </div>
+          <ScaleToggleButton
+            isLogScale={isLogScale}
+            onToggle={() => setIsLogScale(!isLogScale)}
+          />
+        </div>
       </div>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -138,6 +176,8 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             stroke="rgba(255,255,255,0.5)"
             style={{ fontSize: '12px' }}
             label={{ value: parameter.unit, angle: -90, position: 'insideLeft' }}
+            {...getYAxisProps(isLogScale)}
+            tickFormatter={(value) => formatTickValue(value, isLogScale)}
           />
           <Tooltip
             contentStyle={{
@@ -147,7 +187,7 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
             }}
             formatter={(value: number, name: string) => {
               const pathName = branchPaths.find(p => p.id === name)?.name || parameter.name;
-              return [`${value} ${parameter.unit}`, pathName];
+              return [`${formatTooltipValue(value)} ${parameter.unit}`, pathName];
             }}
           />
           <Legend

@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 interface ForecastChartProps {
   metric: string
@@ -26,6 +29,7 @@ const generateData = (_metric: string) => {
 
 const ForecastChart = ({ metric }: ForecastChartProps) => {
   const data = generateData(metric)
+  const [isLogScale, setIsLogScale] = useState(false)
 
   return (
     <motion.div
@@ -34,7 +38,13 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
     >
-      <h2>AI {metric.replace('-', ' ')} Forecast</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <h2>AI {metric.replace('-', ' ')} Forecast</h2>
+        <ScaleToggleButton
+          isLogScale={isLogScale}
+          onToggle={() => setIsLogScale(!isLogScale)}
+        />
+      </div>
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart data={data}>
           <defs>
@@ -54,6 +64,8 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
           />
           <YAxis
             tick={{ fill: '#888' }}
+            {...getYAxisProps(isLogScale)}
+            tickFormatter={(value) => formatTickValue(value, isLogScale)}
           />
           <Tooltip
             contentStyle={{
@@ -61,6 +73,7 @@ const ForecastChart = ({ metric }: ForecastChartProps) => {
               border: '1px solid #444',
               borderRadius: '8px'
             }}
+            formatter={(value: number) => formatTooltipValue(value)}
           />
           <Legend />
           <Area

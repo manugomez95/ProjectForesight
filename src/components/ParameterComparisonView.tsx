@@ -11,6 +11,8 @@ import {
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
 import { expandParameterWithBranching, mergeExpandedParameters } from '../utils/parameterUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import ScaleToggleButton from './ScaleToggleButton';
 
 type ComparisonData = {
   chartData: Array<{ date: string; [key: string]: string | number }>;
@@ -26,6 +28,7 @@ export default function ParameterComparisonView() {
   const [selectedParameterName, setSelectedParameterName] = useState<string>(
     allParameters[0]?.name || ''
   );
+  const [isLogScale, setIsLogScale] = useState(false);
 
   const selectedParameter = allParameters.find(p => p.name === selectedParameterName);
 
@@ -84,19 +87,23 @@ export default function ParameterComparisonView() {
 
       {selectedParameter && (
         <div className="comparison-content">
-          <div className="parameter-info">
-            <h3>{selectedParameter.name}</h3>
-            <p className="parameter-description">{selectedParameter.description}</p>
-            <p className="parameter-unit">
-              Unit: <strong>{selectedParameter.unit}</strong>
-            </p>
-            <p className="scenario-count">
-              Available in <strong>{selectedParameter.scenarioCount}</strong> scenario
-              {selectedParameter.scenarioCount > 1 ? 's' : ''}
-            </p>
-          </div>
-
           <div className="comparison-chart">
+            <div className="chart-header">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <div>
+                  <h3>{selectedParameter.name}</h3>
+                  <p className="parameter-description">
+                    {selectedParameter.description} • Unit: <strong>{selectedParameter.unit}</strong> •
+                    Available in <strong>{selectedParameter.scenarioCount}</strong> scenario{selectedParameter.scenarioCount > 1 ? 's' : ''}
+                  </p>
+                </div>
+                <ScaleToggleButton
+                  isLogScale={isLogScale}
+                  onToggle={() => setIsLogScale(!isLogScale)}
+                />
+              </div>
+            </div>
+
             <ResponsiveContainer width="100%" height={500}>
               <LineChart
                 data={chartData}
@@ -117,6 +124,8 @@ export default function ParameterComparisonView() {
                     angle: -90,
                     position: 'insideLeft',
                   }}
+                  {...getYAxisProps(isLogScale)}
+                  tickFormatter={(value) => formatTickValue(value, isLogScale)}
                 />
                 <Tooltip
                   contentStyle={{
@@ -127,7 +136,7 @@ export default function ParameterComparisonView() {
                   formatter={(value: number, name: string) => {
                     const path = paths.find(p => p.pathId === name);
                     return [
-                      `${value} ${selectedParameter.unit}`,
+                      `${formatTooltipValue(value)} ${selectedParameter.unit}`,
                       path?.pathName || name,
                     ];
                   }}

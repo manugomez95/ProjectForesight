@@ -240,16 +240,16 @@ export const situationalAwareness: AIScenario = {
   parameters: [
     {
       id: 'compute-scaling',
-      name: 'Training Compute (OOMs)',
-      description: 'Orders of magnitude of compute used for training frontier models',
-      unit: 'OOMs relative to GPT-4',
+      name: 'Training Compute Scale',
+      description: 'Scale of compute used for training frontier AI models',
+      unit: 'FLOP',
       color: '#3b82f6',
       data: [
-        { date: '2023', value: 0, confidence: 'high', label: 'GPT-4 baseline' },
-        { date: '2024', value: 0.5, confidence: 'high' },
-        { date: '2025', value: 1.5, confidence: 'high' },
-        { date: '2026', value: 3, confidence: 'medium' },
-        { date: '2027', value: 5, confidence: 'medium', label: 'AGI achieved' }
+        { date: '2023', value: 2e25, confidence: 'high', label: 'GPT-4 baseline' },
+        { date: '2024', value: 6.3e25, confidence: 'high' },
+        { date: '2025', value: 6.3e26, confidence: 'high' },
+        { date: '2026', value: 2e28, confidence: 'medium' },
+        { date: '2027', value: 2e30, confidence: 'medium', label: 'AGI achieved' }
       ]
     },
     {
