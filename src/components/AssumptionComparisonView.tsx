@@ -34,8 +34,8 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
     // Collect all assumptions from all scenarios
     scenarios.forEach((scenario) => {
       const assumptions = getAllAssumptions(
-        (scenario as any).assumptions,
-        (scenario as any).assumptionRefs
+        scenario.assumptions,
+        'assumptionRefs' in scenario ? scenario.assumptionRefs : undefined
       );
 
       assumptions.forEach((assumption) => {
@@ -90,9 +90,6 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
     if (!selectedCategory) return assumptionUsage;
     return assumptionUsage.filter((a) => a.category === selectedCategory);
   }, [assumptionUsage, selectedCategory]);
-
-  const commonAssumptions = filteredAssumptionUsage.filter((a) => a.count > 1);
-  const uniqueAssumptions = filteredAssumptionUsage.filter((a) => a.count === 1);
 
   // Scroll to focused assumption
   useEffect(() => {
