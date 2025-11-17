@@ -19,10 +19,10 @@
   padding: 2rem;
 }
 
-.comparison-header h2 {
+.assumption-comparison-view .comparison-header h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  text-align: center;
+  text-align: left;
 }
 
 .stats-summary {
@@ -105,8 +105,8 @@
 }
 
 .usage-badge {
-  background: #8b5cf6;
-  color: white;
+  background: #475569;
+  color: #e2e8f0;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.85rem;
@@ -1413,7 +1413,7 @@
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
-  text-align: center;
+  text-align: left;
 }
 
 .quiz-progress-container {

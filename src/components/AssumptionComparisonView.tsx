@@ -145,58 +145,33 @@ export default function AssumptionComparisonView({ scenarios, focusedAssumptionI
         ))}
       </div>
 
-      {commonAssumptions.length > 0 && (
+      {(filteredAssumptionUsage.length > 0) && (
         <div className="assumptions-section">
-          <h3>🔗 Common Assumptions (Used by Multiple Scenarios)</h3>
           <div className="assumptions-list">
-            {commonAssumptions.map((usage) => {
-              const scenarioNames = usage.scenarios
-                .map((id) => scenarios.find((s) => s.id === id)?.title || id)
-                .join(', ');
-
+            {filteredAssumptionUsage.map((usage) => {
+              const singleScenario =
+                usage.count === 1
+                  ? (scenarios.find((s) => s.id === usage.scenarios[0])?.title ||
+                      usage.scenarios[0])
+                  : null;
               return (
                 <div
                   key={usage.assumptionId}
                   ref={(el) => {
                     if (el) assumptionRefs.current.set(usage.assumptionId, el);
                   }}
-                  className="assumption-card common"
+                  className="assumption-card"
                 >
                   <div className="assumption-header">
                     <span className={`badge ${usage.category}`}>{usage.category}</span>
-                    <span className="usage-badge">
-                      Used by {usage.count} scenario{usage.count !== 1 ? 's' : ''}
-                    </span>
-                  </div>
-                  <p className="assumption-description">{usage.description}</p>
-                  <div className="scenario-list">
-                    <strong>Scenarios:</strong> {scenarioNames}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {uniqueAssumptions.length > 0 && (
-        <div className="assumptions-section">
-          <h3>🔸 Unique Assumptions (Used by Single Scenario)</h3>
-          <div className="assumptions-list">
-            {uniqueAssumptions.map((usage) => {
-              const scenario = scenarios.find((s) => s.id === usage.scenarios[0]);
-
-              return (
-                <div
-                  key={usage.assumptionId}
-                  ref={(el) => {
-                    if (el) assumptionRefs.current.set(usage.assumptionId, el);
-                  }}
-                  className="assumption-card unique"
-                >
-                  <div className="assumption-header">
-                    <span className={`badge ${usage.category}`}>{usage.category}</span>
-                    <span className="scenario-badge">{scenario?.title || usage.scenarios[0]}</span>
+                    {usage.count > 1 && (
+                      <span className="usage-badge">
+                        {usage.count} scenario{usage.count !== 1 ? 's' : ''}
+                      </span>
+                    )}
+                    {singleScenario && (
+                      <span className="scenario-badge">{singleScenario}</span>
+                    )}
                   </div>
                   <p className="assumption-description">{usage.description}</p>
                 </div>
