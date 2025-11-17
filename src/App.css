@@ -14,7 +14,8 @@
   background: #16213e;
   border: 1px solid #2d3a5f;
   border-radius: 16px;
-  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -1402,7 +1403,8 @@
   border: 1px solid #2d3a5f;
   border-radius: 16px;
   padding: 2rem;
-  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -1639,7 +1641,8 @@
   border: 1px solid #2d3a5f;
   border-radius: 16px;
   padding: 3rem;
-  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -1749,6 +1752,8 @@
   border: 1px solid #2d3a5f;
   border-radius: 16px;
   padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .quiz-forecast-header {
