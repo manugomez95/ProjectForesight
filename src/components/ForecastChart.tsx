@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
-import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue, filterDataForLogScale } from '../utils/chartUtils';
 import ScaleToggleButton from './ScaleToggleButton';
 
 interface ForecastChartProps {
@@ -28,8 +28,13 @@ const generateData = (_metric: string) => {
 }
 
 const ForecastChart = ({ metric }: ForecastChartProps) => {
-  const data = generateData(metric)
+  const baseData = generateData(metric)
   const [isLogScale, setIsLogScale] = useState(false)
+
+  // Filter out zero/negative values for log scale
+  const data = isLogScale
+    ? filterDataForLogScale(baseData, ['value', 'prediction'])
+    : baseData
 
   return (
     <motion.div

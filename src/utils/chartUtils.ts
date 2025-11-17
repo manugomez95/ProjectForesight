@@ -69,3 +69,24 @@ export function formatTooltipValue(value: number): string {
   }
   return value.toLocaleString();
 }
+
+/**
+ * Filter data for log scale compatibility
+ * Removes data points with values <= 0 since log scale cannot display them
+ */
+export function filterDataForLogScale<T extends Record<string, any>>(
+  data: T[],
+  valueKeys: string | string[]
+): T[] {
+  const keys = Array.isArray(valueKeys) ? valueKeys : [valueKeys];
+
+  return data.filter((item) => {
+    // Keep the item if all specified value keys are positive
+    return keys.every((key) => {
+      const value = item[key];
+      // Keep if value is undefined/null (null data points in branching charts)
+      // or if value is positive
+      return value == null || value > 0;
+    });
+  });
+}

@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import type { ScenarioParameter, AIScenario } from '../types/scenario';
 import { createBranchingChartData } from '../utils/parameterUtils';
-import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue, filterDataForLogScale } from '../utils/chartUtils';
 import ScaleToggleButton from './ScaleToggleButton';
 
 interface ScenarioParameterChartProps {
@@ -24,11 +24,16 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
   const [isLogScale, setIsLogScale] = useState(false);
   if (!scenario) {
     // No scenario provided, render simple chart
-    const chartData = parameter.data.map((point) => ({
+    const baseChartData = parameter.data.map((point) => ({
       date: point.date,
       value: point.value,
       label: point.label || '',
     }));
+
+    // Filter out zero/negative values for log scale
+    const chartData = isLogScale
+      ? filterDataForLogScale(baseChartData, 'value')
+      : baseChartData;
 
     return (
       <div className="parameter-chart">
@@ -90,7 +95,12 @@ export default function ScenarioParameterChart({ parameter, scenario }: Scenario
   }
 
   // Use utility function to handle branching logic
-  const { chartData, branchPaths, branchDate } = createBranchingChartData(scenario, parameter);
+  const { chartData: baseChartData, branchPaths, branchDate } = createBranchingChartData(scenario, parameter);
+
+  // Filter out zero/negative values for log scale
+  const chartData = isLogScale
+    ? filterDataForLogScale(baseChartData, branchPaths.length > 0 ? branchPaths.map(p => p.id) : 'value')
+    : baseChartData;
 
   // Simple case: no branching
   if (branchPaths.length === 0) {

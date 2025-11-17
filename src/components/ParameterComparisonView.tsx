@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { getAllParameters, scenarios } from '../data/scenarios';
 import { expandParameterWithBranching, mergeExpandedParameters } from '../utils/parameterUtils';
-import { getYAxisProps, formatTickValue, formatTooltipValue } from '../utils/chartUtils';
+import { getYAxisProps, formatTickValue, formatTooltipValue, filterDataForLogScale } from '../utils/chartUtils';
 import ScaleToggleButton from './ScaleToggleButton';
 
 type ComparisonData = {
@@ -56,7 +56,12 @@ export default function ParameterComparisonView() {
     return { chartData, paths };
   };
 
-  const { chartData, paths } = getComparisonData();
+  const { chartData: baseChartData, paths } = getComparisonData();
+
+  // Filter out zero/negative values for log scale
+  const chartData = isLogScale
+    ? filterDataForLogScale(baseChartData, paths.map(p => p.pathId))
+    : baseChartData;
 
   return (
     <div className="parameter-comparison-view">
